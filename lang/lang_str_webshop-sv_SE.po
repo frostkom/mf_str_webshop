@@ -1,0 +1,182 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-18 09:16+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Martin Fors\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: sv_SE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: esc_html__;esc_html_e;esc_attr__;esc_attr_e;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../include/classes.php:85
+msgid "We do not have a webshop yet..."
+msgstr "Vi har ingen e-handel ännu..."
+
+#: ../include/classes.php:89
+msgid "Go to Settings and enter your Customer Number"
+msgstr "Gå till Inställningarna och ange ett kundnummer"
+
+#: ../include/classes.php:101
+msgid "Test"
+msgstr ""
+
+#: ../include/classes.php:102
+msgid "Live"
+msgstr ""
+
+#: ../include/classes.php:223
+msgid "Page"
+msgstr "Sida"
+
+#: ../include/classes.php:224
+msgid "API Mode"
+msgstr ""
+
+#: ../include/classes.php:225
+msgid "Customer Number"
+msgstr "Kundnummer"
+
+#: ../include/classes.php:226
+msgid "Google Analytics"
+msgstr ""
+
+#: ../include/classes.php:227
+msgid "Include CSS"
+msgstr "Inkludera CSS"
+
+#: ../include/classes.php:228
+msgid "Include Extra CSS"
+msgstr "Inkludera extra CSS"
+
+#: ../include/classes.php:229
+msgid "Header Selector"
+msgstr "ID/Klass för sidhuvud"
+
+#: ../include/classes.php:239
+msgid "Webshop"
+msgstr "E-handel"
+
+#: ../include/classes.php:274
+msgid "Get yours here"
+msgstr "Hämta din här"
+
+#: ../include/classes.php:284
+msgid "This adds basic styling when the Javascript is loaded"
+msgstr "Detta lägger till grundlayouten när Javascript-koden laddas"
+
+#: ../include/classes.php:292
+msgid "This adds compatibility styling for the cart when it is open"
+msgstr "Detta lägger till kompatibilitet för varukorgen när den är öppen"
+
+#: ../view/index.php:128
+msgid "I could not find a Customer Number. Please add one and try again."
+msgstr "Jag kunde inte hitta ett kundnummer. Var vänlig lägg till ett och försök igen."
+
+#~ msgid "Log"
+#~ msgstr "Logg"
+
+#~ msgid "Delete All"
+#~ msgstr "Radera alla"
+
+#~ msgid "Activate"
+#~ msgstr "Aktivera"
+
+#~ msgid "Debug %s"
+#~ msgstr "Felsök %s"
+
+#~ msgid "Debug Database Queries"
+#~ msgstr "Felsök databasfrågor"
+
+#~ msgid "Query Time Limit"
+#~ msgstr "Gränsvärde för databasfrågor"
+
+#~ msgid "Page Time Limit"
+#~ msgstr "Gränsvärde för sidvisning"
+
+#~ msgid "Slow Part Percent Limit"
+#~ msgstr "Gränsvärde för långsam del"
+
+#~ msgid "Log and Debug"
+#~ msgstr "Log och debug"
+
+#~ msgid "Add this to the end of %s"
+#~ msgstr "Lägg till detta i slutet av %s"
+
+#~ msgid ""
+#~ "%s is not writable. Please, make sure that the folder can be written to "
+#~ "so that Wordpress can log errors"
+#~ msgstr ""
+#~ "%s är inte skrivbar. Se till så att mappen är skrivbar så att Wordpress "
+#~ "kan logga fel"
+
+#~ msgid "Change settings in %s"
+#~ msgstr "Ändra inställningar i %s"
+
+#~ msgid ""
+#~ "Change %s to %s in %s or else you have to handle the content in %s so "
+#~ "that it does not grow in size"
+#~ msgstr ""
+#~ "Ändra %s till %s i %s, eller så måste du hantera innehållet i %s för att "
+#~ "det inte ska växa i storlek"
+
+#~ msgid ""
+#~ "This will hurt performance on the frontend so use this for debugging only "
+#~ "and then turn off"
+#~ msgstr ""
+#~ "Detta påverkar prestandan negativt på webbsidan så använd detta endast "
+#~ "för debugging och stäng av det efteråt"
+
+#~ msgid "Remove %s from %s"
+#~ msgstr "Ta bort %s från %s"
+
+#~ msgid "New"
+#~ msgstr "Ny"
+
+#~ msgid "There are %d new errors in the log"
+#~ msgstr "Det finns %d nya fel i loggen"
+
+#~ msgid "There is one new error in the log"
+#~ msgstr "Det finns ett nytt fel i loggen"
+
+#~ msgid "The information was deleted"
+#~ msgstr "Informationen togs bort"
+
+#~ msgid "The information is being ignored from now on"
+#~ msgstr "Informationen ignoreras from. nu"
+
+#~ msgid "I could only delete %d within %d seconds"
+#~ msgstr "Jag kunde endast radera %s inom %d sekunder"
+
+#~ msgid "I deleted them all for you"
+#~ msgstr "Jag tog bort allihop åt dig"
+
+#~ msgid "All"
+#~ msgstr "Alla"
+
+#~ msgid "Notice"
+#~ msgstr "Notifiering"
+
+#~ msgid "Ignore"
+#~ msgstr "Ignorera"
+
+#~ msgid "Trash"
+#~ msgstr "Papperskorg"
+
+#~ msgid "Name"
+#~ msgstr "Namn"
+
+#~ msgid "Amount"
+#~ msgstr "Antal"
+
+#~ msgid "Date"
+#~ msgstr "Datum"
+
+#~ msgid "Delete"
+#~ msgstr "Radera"

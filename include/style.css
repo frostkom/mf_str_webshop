@@ -1,0 +1,25 @@
+@media all
+{
+	/* This prevents scroll when cart is open */
+	html.responsive
+	{
+		overflow-x: unset !important;
+	}
+
+	/* This prevents scroll-top-link to appear on top of cart */
+	body.menu-is-open #scroll-top-link
+	{
+		z-index: 0;
+	}
+
+	/* This adds margin when admin bar is visible, otherwise close icon and "toast" notice won't be displayed properly in relation to admin bar */
+	body.logged-in.admin-bar #str-ecom #menu-navigation.open
+	{
+		margin-top: 32px;
+	}
+
+	body.logged-in.admin-bar #str-ecom .Toastify__toast-container--top-center
+	{
+		margin-top: 32px;
+	}
+}
