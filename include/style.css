@@ -12,6 +12,12 @@
 		z-index: 0;
 	}
 
+	/* This adds top margin to temporary message when changing content in cart */
+	body #str-ecom .Toastify__toast-container--top-center
+	{
+		margin-top: 100px;
+	}
+
 	/* This adds margin when admin bar is visible, otherwise close icon and "toast" notice won't be displayed properly in relation to admin bar */
 	body.logged-in.admin-bar #str-ecom #menu-navigation.open
 	{
@@ -20,6 +26,6 @@
 
 	body.logged-in.admin-bar #str-ecom .Toastify__toast-container--top-center
 	{
-		margin-top: 32px;
+		margin-top: 132px;
 	}
 }
