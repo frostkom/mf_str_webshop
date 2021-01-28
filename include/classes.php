@@ -40,6 +40,18 @@ class mf_str_webshop
 
 			switch($setting_str_webshop_api_mode)
 			{
+				case 'test_if_logged_in':
+					if(is_user_logged_in())
+					{
+						$script_url = "https://ecommercetest.str.se/static/js/";
+					}
+
+					else
+					{
+						$script_url = "https://ecommerce.str.se/static/js/";
+					}
+				break;
+
 				case 'test':
 					$script_url = "https://ecommercetest.str.se/static/js/";
 				break;
@@ -100,6 +112,7 @@ class mf_str_webshop
 		return array(
 			'test' => __("Test", 'lang_str_webshop'),
 			'live' => __("Live", 'lang_str_webshop'),
+			'test_if_logged_in' => __("Test", 'lang_str_webshop')." (".__("If logged in", 'lang_str_webshop').")",
 		);
 	}
 
@@ -247,7 +260,15 @@ class mf_str_webshop
 		$arr_data = array();
 		get_post_children(array('add_choose_here' => true), $arr_data);
 
-		echo show_select(array('data' => $arr_data, 'name' => $setting_key, 'value' => $option, 'suffix' => get_option_page_suffix(array('value' => $option))));
+		$suffix = get_option_page_suffix(array('value' => $option));
+
+		if($option > 0)
+		{
+			$suffix .= "&nbsp;<a href='".get_permalink($option)."'><i class='far fa-eye fa-lg' title='".__("Preview on Public Page", 'lang_str_webshop')."'></i></a>"
+			."&nbsp;<a href='".get_site_url()."/wp-content/plugins/mf_str_webshop/view/'><i class='fas fa-hard-hat fa-lg' title='".__("Preview on Test Page", 'lang_str_webshop')."'></i></a>";
+		}
+
+		echo show_select(array('data' => $arr_data, 'name' => $setting_key, 'value' => $option, 'suffix' => $suffix));
 	}
 
 	function setting_str_webshop_api_mode_callback()
