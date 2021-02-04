@@ -264,7 +264,7 @@ class mf_str_webshop
 
 		if($option > 0)
 		{
-			$suffix .= "&nbsp;<a href='".get_permalink($option)."'><i class='far fa-eye fa-lg' title='".__("Preview on Public Page", 'lang_str_webshop')."'></i></a>"
+			$suffix .= "&nbsp;<a href='".get_permalink($option)."'><i class='fa fa-eye fa-lg' title='".__("Preview on Public Page", 'lang_str_webshop')."'></i></a>"
 			."&nbsp;<a href='".get_site_url()."/wp-content/plugins/mf_str_webshop/view/'><i class='fas fa-hard-hat fa-lg' title='".__("Preview on Test Page", 'lang_str_webshop')."'></i></a>";
 		}
 

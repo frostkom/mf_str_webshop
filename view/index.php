@@ -42,8 +42,10 @@ if($setting_str_webshop_post_id > 0)
 {
 	// 
 	##########################
+	$post_url = get_permalink($setting_str_webshop_post_id);
+
 	list($content, $headers) = get_url_content(array(
-		'url' => get_permalink($setting_str_webshop_post_id),
+		'url' => $post_url,
 		'catch_head' => true,
 	));
 
@@ -56,19 +58,27 @@ if($setting_str_webshop_post_id > 0)
 				list($part_one, $part_two) = explode('id="str-ecom"', $content);
 			}
 
-			else
+			else if(strpos($content, "id='str-ecom'"))
 			{
 				list($part_one, $part_two) = explode("id='str-ecom'", $content);
 			}
 
-			$arr_header = explode("<noscript>", $part_one);
-			list($rest, $footer) = explode("</script>", $part_two, 2);
-
-			$header = "";
-
-			for($i = 0; $i < (count($arr_header) - 1); $i++)
+			else
 			{
-				$header .= $arr_header[$i];
+				do_log("I could not find the str-ecom tag on ".$post_url);
+			}
+
+			if(isset($part_one) && isset($part_two))
+			{
+				$arr_header = explode("<noscript>", $part_one);
+				list($rest, $footer) = explode("</script>", $part_two, 2);
+
+				$header = "";
+
+				for($i = 0; $i < (count($arr_header) - 1); $i++)
+				{
+					$header .= $arr_header[$i];
+				}
 			}
 		break;
 	}
