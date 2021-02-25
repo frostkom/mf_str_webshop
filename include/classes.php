@@ -89,6 +89,10 @@ class mf_str_webshop
 
 			$out .= "></div>
 			<script src='".$script_url."'></script>";
+
+			// This will make explode() in view/index.php split at the wrong position
+			//$plugin_version = get_plugin_version(__FILE__);
+			//mf_enqueue_script('script_str_webshop_ecom', $script_url, $plugin_version);
 		}
 
 		else
