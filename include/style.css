@@ -28,4 +28,9 @@
 	{
 		margin-top: 132px;
 	}
+
+	#str-ecom .alert.alert-info .small.ml-4
+	{
+		white-space: nowrap;
+	}
 }
