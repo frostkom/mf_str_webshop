@@ -33,4 +33,9 @@
 	{
 		white-space: nowrap;
 	}
+
+	#str-ecom #cart.cart-info .cart-items
+	{
+		height: calc(100% - 10rem) !important;
+	}
 }
