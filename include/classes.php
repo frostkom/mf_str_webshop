@@ -462,7 +462,7 @@ class mf_str_webshop
 	function setting_str_webshop_include_extra_css_callback()
 	{
 		$setting_key = get_setting_key(__FUNCTION__);
-		$option = get_option($setting_key, 'no');
+		$option = get_option($setting_key, 'yes');
 
 		echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option, 'description' => __("This adds compatibility styling for the cart when it is open", $this->lang_key)));
 	}
@@ -495,7 +495,7 @@ class mf_str_webshop
 
 	function wp_head()
 	{
-		if(get_option('setting_str_webshop_include_extra_css') == 'yes')
+		if(get_option('setting_str_webshop_include_extra_css') != 'no')
 		{
 			$plugin_include_url = plugin_dir_url(__FILE__);
 			$plugin_version = get_plugin_version(__FILE__);
