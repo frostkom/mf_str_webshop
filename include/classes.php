@@ -144,89 +144,105 @@ class mf_str_webshop
 			{
 				case 'html':
 					$out .= "<li>
-						<i class='fa ".(is_plugin_active($key) ? "fa fa-check green" : "fa fa-times red")."'></i> ".$value;
+						<i class='fa ".(is_plugin_active($key) ? "fa fa-check green" : "fa fa-times red")."'></i> ";
+
+						if(is_plugin_active($key) == false)
+						{
+							$out .= "<a href='".admin_url("plugins.php")."'>";
+						}
+
+							$out .= $value;
+
+						if(is_plugin_active($key) == false)
+						{
+							$out .= "</a>";
+						}
+
 				break;
 			}
 
-				switch($key)
+				if(is_plugin_active($key))
 				{
-					case 'github-updater/github-updater.php':
-						$github_updater = get_site_option('github_updater');
+					switch($key)
+					{
+						case 'github-updater/github-updater.php':
+							$github_updater = get_site_option('github_updater');
 
-						switch($data['type'])
-						{
-							case 'html':
-								$out .= "<ul>
-									<li>&nbsp;&nbsp;<i class='fa ".(isset($github_updater['github_access_token']) && $github_updater['github_access_token'] != '' ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$this->github_settings_url."'>".__("GitHub.com Access Token", $obj_str_webshop->lang_key)."</a></li>
-								</ul>";
-							break;
+							switch($data['type'])
+							{
+								case 'html':
+									$out .= "<ul>
+										<li>&nbsp;&nbsp;<i class='fa ".(isset($github_updater['github_access_token']) && $github_updater['github_access_token'] != '' ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$this->github_settings_url."'>".__("GitHub.com Access Token", $obj_str_webshop->lang_key)."</a></li>
+									</ul>";
+								break;
 
-							case 'menu':
-								if(!isset($github_updater['github_access_token']) || $github_updater['github_access_token'] == '')
-								{
-									$status_warnings++;
-								}
-							break;
-						}
-					break;
+								case 'menu':
+									if(!isset($github_updater['github_access_token']) || $github_updater['github_access_token'] == '')
+									{
+										$status_warnings++;
+									}
+								break;
+							}
+						break;
 
-					case 'mf_base/index.php':
-						if(!is_multisite() || is_main_site())
-						{
-							$setting_base_update_htaccess = get_option('setting_base_update_htaccess');
-							$settings_url = admin_url("options-general.php?page=settings_mf_base");
-						}
+						case 'mf_base/index.php':
+							if(!is_multisite() || is_main_site())
+							{
+								$setting_base_update_htaccess = get_option('setting_base_update_htaccess');
+								$settings_url = admin_url("options-general.php?page=settings_mf_base");
+							}
 
-						else
-						{
-							$main_site_id = get_main_site_id();
+							else
+							{
+								$main_site_id = get_main_site_id();
 
-							$setting_base_update_htaccess = get_blog_option($main_site_id, 'setting_base_update_htaccess');
-							$settings_url = get_admin_url($main_site_id, "options-general.php?page=settings_mf_base");
-						}
+								$setting_base_update_htaccess = get_blog_option($main_site_id, 'setting_base_update_htaccess');
+								$settings_url = get_admin_url($main_site_id, "options-general.php?page=settings_mf_base");
+							}
 
-						switch($data['type'])
-						{
-							case 'html':
-								$out .= "<ul>
-									<li>&nbsp;&nbsp;<i class='fa ".($setting_base_update_htaccess == 'yes' ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Automatically Update %s", $obj_str_webshop->lang_key)."</a></li>
-								</ul>";
-							break;
+							switch($data['type'])
+							{
+								case 'html':
+									$out .= "<ul>
+										<li>&nbsp;&nbsp;<i class='fa ".($setting_base_update_htaccess == 'yes' ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Automatically Update %s", $obj_str_webshop->lang_key)."</a></li>
+									</ul>";
+								break;
 
-							case 'menu':
-								if($setting_base_update_htaccess != 'yes')
-								{
-									$status_warnings++;
-								}
-							break;
-						}
-					break;
+								case 'menu':
+									if($setting_base_update_htaccess != 'yes')
+									{
+										$status_warnings++;
+									}
+								break;
+							}
+						break;
 
-					case 'mf_str_webshop/index.php':
-						$settings_url = admin_url("options-general.php?page=settings_mf_base#settings_str_webshop");
+						case 'mf_str_webshop/index.php':
+							$settings_url = admin_url("options-general.php?page=settings_mf_base#settings_str_webshop");
 
-						switch($data['type'])
-						{
-							case 'html':
-								$out .= "<ul>
-									<li>&nbsp;&nbsp;<i class='fa ".(get_option('setting_str_webshop_post_id') > 0 ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Page", $obj_str_webshop->lang_key)."</a></li>
-									<li>&nbsp;&nbsp;<i class='fa ".(get_option('setting_str_webshop_customer_number') > 0 ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Customer Number", $obj_str_webshop->lang_key)."</a></li>
-								</ul>";
-							break;
+							switch($data['type'])
+							{
+								case 'html':
+									$out .= "<ul>
+										<li>&nbsp;&nbsp;<i class='fa ".(get_option('setting_str_webshop_post_id') > 0 ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Page", $obj_str_webshop->lang_key)."</a></li>
+										<li>&nbsp;&nbsp;<i class='fa ".(get_option('setting_str_webshop_customer_number') > 0 ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Customer Number", $obj_str_webshop->lang_key)."</a></li>
+									</ul>";
+								break;
 
-							case 'menu':
-								if(!(get_option('setting_str_webshop_post_id') > 0))
-								{
-									$status_warnings++;
-								}
+								case 'menu':
+									if(!(get_option('setting_str_webshop_post_id') > 0))
+									{
+										$status_warnings++;
+									}
 
-								if(!(get_option('setting_str_webshop_customer_number') > 0))
-								{
-									$status_warnings++;
-								}
-							break;
-						}
-					break;
+									if(!(get_option('setting_str_webshop_customer_number') > 0))
+									{
+										$status_warnings++;
+									}
+								break;
+							}
+						break;
+					}
 				}
 
 			switch($data['type'])
