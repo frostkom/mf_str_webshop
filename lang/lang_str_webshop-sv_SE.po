@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-05 08:34+0100\n"
+"POT-Creation-Date: 2021-03-05 10:27+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -36,165 +36,187 @@ msgstr ""
 msgid "If logged in"
 msgstr "Som inloggad"
 
-#: ../include/classes.php:160
+#: ../include/classes.php:175
 msgid "GitHub.com Access Token"
 msgstr ""
 
-#: ../include/classes.php:192
+#: ../include/classes.php:207
 #, php-format
 msgid "Automatically Update %s"
 msgstr "Uppdatera %s automatiskt"
 
-#: ../include/classes.php:212
-#: ../include/classes.php:374
+#: ../include/classes.php:227
+#: ../include/classes.php:390
 msgid "Page"
 msgstr "Sida"
 
-#: ../include/classes.php:213
-#: ../include/classes.php:376
+#: ../include/classes.php:228
+#: ../include/classes.php:392
 msgid "Customer Number"
 msgstr "Kundnummer"
 
-#: ../include/classes.php:249
+#: ../include/classes.php:265
 msgid "Warnings"
 msgstr "Varningar"
 
-#: ../include/classes.php:375
+#: ../include/classes.php:391
 msgid "API Mode"
 msgstr "API-läge"
 
-#: ../include/classes.php:377
+#: ../include/classes.php:393
 msgid "Google Analytics"
 msgstr ""
 
-#: ../include/classes.php:378
+#: ../include/classes.php:394
 msgid "Include CSS"
 msgstr "Inkludera CSS"
 
-#: ../include/classes.php:379
+#: ../include/classes.php:395
 msgid "Include Extra CSS"
 msgstr "Inkludera extra CSS"
 
-#: ../include/classes.php:380
+#: ../include/classes.php:396
 msgid "Header Selector"
 msgstr "ID/Klass för sidhuvud"
 
-#: ../include/classes.php:390
-#: ../include/classes.php:470
+#: ../include/classes.php:406
+#: ../include/classes.php:486
 msgid "Webshop"
 msgstr "E-handel"
 
-#: ../include/classes.php:405
+#: ../include/classes.php:421
 msgid "Preview on Public Page"
 msgstr "Förhandsgranska på publik sida"
 
-#: ../include/classes.php:406
+#: ../include/classes.php:422
 msgid "Preview on Test Page"
 msgstr "Förhandsgranska på testsida"
 
-#: ../include/classes.php:433
+#: ../include/classes.php:449
 msgid "Get yours here"
 msgstr "Hämta din här"
 
-#: ../include/classes.php:443
+#: ../include/classes.php:459
 msgid "This adds basic styling when the Javascript is loaded"
 msgstr "Detta lägger till grundlayouten när Javascript-koden laddas"
 
-#: ../include/classes.php:451
+#: ../include/classes.php:467
 msgid "This adds compatibility styling for the cart when it is open"
 msgstr "Detta lägger till kompatibilitet för varukorgen när den är öppen"
 
-#: ../include/classes.php:473
-#: ../manual/index.php:6
+#: ../include/classes.php:489
+#: ../manual/index.php:16
 msgid "Manual"
 msgstr ""
 
-#: ../include/classes.php:476
+#: ../include/classes.php:492
 msgid "Settings"
 msgstr "Inställningar"
 
-#: ../manual/index.php:12
+#: ../manual/index.php:22
 msgid "Install webshop on a site"
 msgstr "Installera e-handel på en webbplats"
 
-#: ../manual/index.php:15
+#: ../manual/index.php:25
 #, php-format
 msgid "Download ZIP files from %s"
-msgstr "Ladda ner Zip-filerna från %s"
+msgstr "Ladda ner ZIP-filerna från %s"
 
-#: ../manual/index.php:16
+#: ../manual/index.php:26
 #, php-format
 msgid "Upload ZIP files to %s"
 msgstr "Ladda upp ZIP-filerna till %s"
 
-#: ../manual/index.php:17
+#: ../manual/index.php:27
 #, php-format
 msgid "Login to %s"
 msgstr "Logga in i %s"
 
-#: ../manual/index.php:18
+#: ../manual/index.php:28
 #, php-format
 msgid "Go to %sPlugins%s and activate %s first, then %s and %s"
 msgstr "Gå till %sTillägg%s och aktivera %s först, sen %s och %s"
 
-#: ../manual/index.php:23
+#: ../manual/index.php:33
 msgid "Activate webshop on a page"
 msgstr "Aktivera e-handel på en sida"
 
-#: ../manual/index.php:26
+#: ../manual/index.php:36
 #, php-format
 msgid "Open %sPages%s and edit the page you plan to have the webshop on"
 msgstr "Öppna %sSidor%s och redigera den sidan som du tänker ha e-handeln på"
 
-#: ../manual/index.php:27
+#: ../manual/index.php:37
 #, php-format
 msgid "Add the shortcode %s where you want the webshop to appear on the page"
 msgstr "Lägg till kortkoden %s där du vill att e-handeln ska visas på sidan"
 
-#: ../manual/index.php:28
+#: ../manual/index.php:38
 #, php-format
 msgid "Go to Settings -> My Settings -> %sCommon%s"
 msgstr "Gå till Inställningar -> Mina inställningar -> %sGemensamt%s"
 
-#: ../manual/index.php:29
+#: ../manual/index.php:39
 #, php-format
 msgid "Choose Yes on Automatically Update %s and save"
 msgstr "Välj Ja på Uppdatera %s automatiskt och spara"
 
-#: ../manual/index.php:30
+#: ../manual/index.php:40
 #, php-format
 msgid "Go to Settings -> My Settings -> %sWebshop%s"
 msgstr "Gå till Inställningar -> Mina inställningar -> %sE-handel%s"
 
-#: ../manual/index.php:31
+#: ../manual/index.php:41
 msgid "Choose the page that you previously added the shortcode to, choose Test/Live, add the Customer Number and save"
 msgstr "Välj sidan som du la in kortkoden på, välj Test/Live, lägg till kundnummer och spara"
 
-#: ../manual/index.php:32
+#: ../manual/index.php:42
+#, php-format
+msgid "If the Cachier button is not visible in the Cart, go to Settings -> My Settings -> %sWebshop%s and set Include Extra CSS to Yes"
+msgstr "Om Kassa-knappen inte är synlig i Varukorgen, gå till Inställningar -> Mina inställningar -> %sE-handel%s och ändra Inkludera extra CSS till Ja"
+
+#: ../manual/index.php:43
 msgid "Clear the server cache if there is a Cache plugin installed"
 msgstr "Rensa servercachen om det finns ett cache-tillägg installerat"
 
-#: ../manual/index.php:37
+#: ../manual/index.php:48
 #, php-format
 msgid "Activate automatic updates of plugins on %s"
 msgstr "Aktivera automatisk uppdatering av tillägg på %s"
 
-#: ../manual/index.php:40
+#: ../manual/index.php:51
 #, php-format
 msgid "Go to Settings -> %s -> %s"
 msgstr "Gå till Inställningar -> %s -> %s"
 
-#: ../manual/index.php:47
+#: ../manual/index.php:58
 #, php-format
 msgid "Add %s in the field %s and save"
 msgstr "Lägg till %s i fältet %s och spara"
 
-#: ../manual/index.php:52
+#: ../manual/index.php:63
 #, php-format
 msgid "Contact an admin and ask for the %s. Then add it in the field %s and save"
 msgstr "Kontakta en administratör och be om %s. Lägg därefter in den i fältet %s och spara"
 
-#: ../manual/index.php:62
+#: ../manual/index.php:67
+#, php-format
+msgid "If the tab %s and field %s is not immediately visible, be patient and go back in a few minutes to check"
+msgstr "Om tabben %s och fältet %s inte direkt är synliga, ha tålamod och kom tillbaka om någon minut för att kolla igen"
+
+#: ../manual/index.php:74
+msgid "Send Instruction"
+msgstr "Skicka instruktioner"
+
+#: ../manual/index.php:76
+msgid "If you want to send any of the instructions below to someone else, add their site URL here to change all links below"
+msgstr "Om du vill skicka någon av instruktionern till någon annan, lägg in deras URL här för att ändra alla länkar"
+
+#: ../manual/index.php:77
+msgid "Reload"
+msgstr "Ladda om"
+
+#: ../manual/index.php:81
 msgid "Status"
 msgstr ""
 
