@@ -41,6 +41,6 @@
 
 	#str-ecom #cart.cart-info .cart-items
 	{
-		height: calc(100% - 10rem) !important;
+		height: calc(100% - 12rem) !important;
 	}
 }
