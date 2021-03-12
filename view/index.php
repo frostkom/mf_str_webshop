@@ -13,118 +13,25 @@ include_once("../include/classes.php");
 
 $obj_str_webshop = new mf_str_webshop();
 
-$header = "<html><body>";
-$footer = "</body></html>";
-
-// 
-##########################
-/*list($content, $headers) = get_url_content(array(
-	'url' => get_site_url(),
-	'catch_head' => true,
-));
-
-switch($headers['http_code'])
-{
-	case 200:
-	case 201:
-		// Where do I split and insert h1 etc?
-		list($part_one, $part_two) = explode("str-ecom", $content, 2);
-
-		list($header, $rest) = explode("<body>", $part_one);
-		list($rest, $footer) = explode("</body>", $part_two, 2);
-	break;
-}*/
-##########################
+$obj_str_webshop->page_header = "<html><body>";
+$obj_str_webshop->page_footer = "</body></html>";
 
 $setting_str_webshop_post_id = get_option('setting_str_webshop_post_id');
 
 if($setting_str_webshop_post_id > 0)
 {
-	// 
-	##########################
-	$post_url = get_permalink($setting_str_webshop_post_id);
-
-	list($content, $headers) = get_url_content(array(
-		'url' => $post_url,
-		'catch_head' => true,
-	));
-
-	switch($headers['http_code'])
+	if($obj_str_webshop->get_header_footer_from_page($setting_str_webshop_post_id))
 	{
-		case 200:
-		case 201:
-			if(strpos($content, 'id="str-ecom"'))
-			{
-				list($part_one, $part_two) = explode('id="str-ecom"', $content);
-			}
-
-			else if(strpos($content, "id='str-ecom'"))
-			{
-				list($part_one, $part_two) = explode("id='str-ecom'", $content);
-			}
-
-			else
-			{
-				do_log("I could not find the str-ecom tag on ".$post_url);
-			}
-
-			if(isset($part_one) && isset($part_two))
-			{
-				$arr_header = explode("<noscript>", $part_one);
-				list($rest, $footer) = explode("</script>", $part_two, 2);
-
-				$header = "";
-
-				for($i = 0; $i < (count($arr_header) - 1); $i++)
-				{
-					$header .= $arr_header[$i];
-				}
-			}
-		break;
+		// Do nothing
 	}
-	##########################
 
-	// BB does not let me fetch the correct header/footer this way
-	##########################
-	/*ob_start();
-
-	$post = get_post($setting_str_webshop_post_id);
-
-	get_header();
-
-	echo "<div class='fl-archive container'>
-		<div class='row'>";
-
-			FLTheme::sidebar('left');
-
-			echo "<div class='fl-content ";
-
-				FLTheme::content_class();
-
-			echo "' itemscope='itemscope' itemtype='http://schema.org/Blog'>";
-
-				FLTheme::archive_page_header();
-
-				echo "<h1>".$post->post_title."</h1>";
-
-	$header = ob_get_clean();
-
-	ob_start();
-
-				echo "</div>";
-
-			FLTheme::sidebar('right');
-
-		echo "</div>
-	</div>";
-
-	get_footer();
-
-	$footer = ob_get_clean();*/
-	##########################
+	else
+	{
+		do_log("I could not find the str-ecom tag on ".get_permalink($setting_str_webshop_post_id));
+	}
 }
 
-echo $header;
+echo $obj_str_webshop->page_header;
 
 	$setting_str_webshop_customer_number = get_option('setting_str_webshop_customer_number');
 
@@ -140,4 +47,4 @@ echo $header;
 		echo get_notification();
 	}
 
-echo $footer;
+echo $obj_str_webshop->page_footer;

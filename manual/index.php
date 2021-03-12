@@ -52,17 +52,17 @@ echo "<div class='wrap'>
 								<li>";
 
 									$github_updater = get_site_option('github_updater');
-								
+
 									if(isset($github_updater['github_access_token']) && $github_updater['github_access_token'] != '' && substr($github_updater['github_access_token'], 0, 3) == "409")
 									{
 										echo sprintf(__("Add %s in the field %s and save", $obj_str_webshop->lang_key), "<code>".$github_updater['github_access_token']."</code>", "GitHub.com Access Token");
 									}
-									
+
 									else
 									{
 										echo sprintf(__("Contact an admin and ask for the %s. Then add it in the field %s and save", $obj_str_webshop->lang_key), "GitHub.com Access Token", "GitHub.com Access Token");
 									}
-									
+
 								echo "</li>
 								<li>".sprintf(__("If the tab %s and field %s is not immediately visible, be patient and go back in a few minutes to check", $obj_str_webshop->lang_key), "GitHub", "GitHub.com Access Token")."</li>
 							</ol>

@@ -21,6 +21,114 @@ class mf_str_webshop
 		return str_replace($site_domain, "", $post_url);
 	}
 
+	function get_header_footer_from_page($setting_str_webshop_post_id)
+	{
+		//
+		##########################
+		/*list($content, $headers) = get_url_content(array(
+			'url' => get_site_url(),
+			'catch_head' => true,
+		));
+
+		switch($headers['http_code'])
+		{
+			case 200:
+			case 201:
+				// Where do I split and insert h1 etc?
+				list($part_one, $part_two) = explode("str-ecom", $content, 2);
+
+				list($this->page_header, $rest) = explode("<body>", $part_one);
+				list($rest, $this->page_footer) = explode("</body>", $part_two, 2);
+			break;
+		}*/
+		##########################
+
+		//
+		##########################
+		$post_url = get_permalink($setting_str_webshop_post_id);
+
+		list($content, $headers) = get_url_content(array(
+			'url' => $post_url,
+			'catch_head' => true,
+		));
+
+		switch($headers['http_code'])
+		{
+			case 200:
+			case 201:
+				if(strpos($content, 'id="str-ecom"'))
+				{
+					list($part_one, $part_two) = explode('id="str-ecom"', $content);
+				}
+
+				else if(strpos($content, "id='str-ecom'"))
+				{
+					list($part_one, $part_two) = explode("id='str-ecom'", $content);
+				}
+
+				else
+				{
+					return false;
+				}
+
+				if(isset($part_one) && isset($part_two))
+				{
+					$arr_header = explode("<noscript>", $part_one);
+					list($rest, $this->page_footer) = explode("</script>", $part_two, 2);
+
+					$this->page_header = "";
+
+					for($i = 0; $i < (count($arr_header) - 1); $i++)
+					{
+						$this->page_header .= $arr_header[$i];
+					}
+				}
+			break;
+		}
+		##########################
+
+		// BB does not let me fetch the correct header/footer this way
+		##########################
+		/*ob_start();
+
+		$post = get_post($setting_str_webshop_post_id);
+
+		get_header();
+
+		echo "<div class='fl-archive container'>
+			<div class='row'>";
+
+				FLTheme::sidebar('left');
+
+				echo "<div class='fl-content ";
+
+					FLTheme::content_class();
+
+				echo "' itemscope='itemscope' itemtype='http://schema.org/Blog'>";
+
+					FLTheme::archive_page_header();
+
+					echo "<h1>".$post->post_title."</h1>";
+
+		$this->page_header = ob_get_clean();
+
+		ob_start();
+
+					echo "</div>";
+
+				FLTheme::sidebar('right');
+
+			echo "</div>
+		</div>";
+
+		get_footer();
+
+		$this->page_footer = ob_get_clean();*/
+		##########################
+
+		return true;
+	}
+
 	function get_view_code($data = array())
 	{
 		if(!isset($data['post_id'])){			$data['post_id'] = get_option('setting_str_webshop_post_id');}
@@ -172,7 +280,7 @@ class mf_str_webshop
 							{
 								case 'html':
 									$out .= "<ul>
-										<li>&nbsp;&nbsp;<i class='fa ".(isset($github_updater['github_access_token']) && $github_updater['github_access_token'] != '' ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$this->github_settings_url."'>".__("GitHub.com Access Token", $obj_str_webshop->lang_key)."</a></li>
+										<li>&nbsp;&nbsp;<i class='fa ".(isset($github_updater['github_access_token']) && $github_updater['github_access_token'] != '' ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$this->github_settings_url."'>".__("GitHub.com Access Token", $this->lang_key)."</a></li>
 									</ul>";
 								break;
 
@@ -204,7 +312,7 @@ class mf_str_webshop
 							{
 								case 'html':
 									$out .= "<ul>
-										<li>&nbsp;&nbsp;<i class='fa ".($setting_base_update_htaccess == 'yes' ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Automatically Update %s", $obj_str_webshop->lang_key)."</a></li>
+										<li>&nbsp;&nbsp;<i class='fa ".($setting_base_update_htaccess == 'yes' ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Automatically Update %s", $this->lang_key)."</a></li>
 									</ul>";
 								break;
 
@@ -219,18 +327,33 @@ class mf_str_webshop
 
 						case 'mf_str_webshop/index.php':
 							$settings_url = admin_url("options-general.php?page=settings_mf_base#settings_str_webshop");
+							$setting_str_webshop_post_id = get_option('setting_str_webshop_post_id');
 
 							switch($data['type'])
 							{
 								case 'html':
 									$out .= "<ul>
-										<li>&nbsp;&nbsp;<i class='fa ".(get_option('setting_str_webshop_post_id') > 0 ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Page", $obj_str_webshop->lang_key)."</a></li>
-										<li>&nbsp;&nbsp;<i class='fa ".(get_option('setting_str_webshop_customer_number') > 0 ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Customer Number", $obj_str_webshop->lang_key)."</a></li>
+										<li>&nbsp;&nbsp;<i class='fa ".($setting_str_webshop_post_id > 0 ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Page", $this->lang_key)."</a></li>";
+
+										if($setting_str_webshop_post_id > 0)
+										{
+											$out .= "<li>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa ".($this->get_header_footer_from_page($setting_str_webshop_post_id) ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".get_permalink($setting_str_webshop_post_id)."'>".__("Public and Contains the Correct Data", $this->lang_key)."</a></li>";
+										}
+
+										$out .= "<li>&nbsp;&nbsp;<i class='fa ".(get_option('setting_str_webshop_customer_number') > 0 ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Customer Number", $this->lang_key)."</a></li>
 									</ul>";
 								break;
 
 								case 'menu':
-									if(!(get_option('setting_str_webshop_post_id') > 0))
+									if($setting_str_webshop_post_id > 0)
+									{
+										if($this->get_header_footer_from_page($setting_str_webshop_post_id) == false)
+										{
+											$status_warnings++;
+										}
+									}
+
+									else
 									{
 										$status_warnings++;
 									}
@@ -262,7 +385,7 @@ class mf_str_webshop
 			case 'menu':
 				if($status_warnings > 0)
 				{
-					return "&nbsp;<span class='update-plugins' title='".__("Warnings", $obj_str_webshop->lang_key)."'>
+					return "&nbsp;<span class='update-plugins' title='".__("Warnings", $this->lang_key)."'>
 						<span>".$status_warnings."</span>
 					</span>";
 				}

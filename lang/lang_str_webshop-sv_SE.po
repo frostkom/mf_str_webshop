@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-05 10:27+0100\n"
+"POT-Creation-Date: 2021-03-09 13:48+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -15,101 +15,105 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../include/classes.php:106
+#: ../include/classes.php:214
 msgid "We do not have a webshop yet..."
 msgstr "Vi har ingen e-handel ännu..."
 
-#: ../include/classes.php:110
+#: ../include/classes.php:218
 msgid "Go to Settings and enter your Customer Number"
 msgstr "Gå till Inställningarna och ange ett kundnummer"
 
-#: ../include/classes.php:122
-#: ../include/classes.php:124
+#: ../include/classes.php:230
+#: ../include/classes.php:232
 msgid "Test"
 msgstr ""
 
-#: ../include/classes.php:123
+#: ../include/classes.php:231
 msgid "Live"
 msgstr ""
 
-#: ../include/classes.php:124
+#: ../include/classes.php:232
 msgid "If logged in"
 msgstr "Som inloggad"
 
-#: ../include/classes.php:175
+#: ../include/classes.php:283
 msgid "GitHub.com Access Token"
 msgstr ""
 
-#: ../include/classes.php:207
+#: ../include/classes.php:315
 #, php-format
 msgid "Automatically Update %s"
 msgstr "Uppdatera %s automatiskt"
 
-#: ../include/classes.php:227
-#: ../include/classes.php:390
+#: ../include/classes.php:336
+#: ../include/classes.php:513
 msgid "Page"
 msgstr "Sida"
 
-#: ../include/classes.php:228
-#: ../include/classes.php:392
+#: ../include/classes.php:340
+msgid "Public and Contains the Correct Data"
+msgstr "Publik och innehåller rätt data"
+
+#: ../include/classes.php:343
+#: ../include/classes.php:515
 msgid "Customer Number"
 msgstr "Kundnummer"
 
-#: ../include/classes.php:265
+#: ../include/classes.php:388
 msgid "Warnings"
 msgstr "Varningar"
 
-#: ../include/classes.php:391
+#: ../include/classes.php:514
 msgid "API Mode"
 msgstr "API-läge"
 
-#: ../include/classes.php:393
+#: ../include/classes.php:516
 msgid "Google Analytics"
 msgstr ""
 
-#: ../include/classes.php:394
+#: ../include/classes.php:517
 msgid "Include CSS"
 msgstr "Inkludera CSS"
 
-#: ../include/classes.php:395
+#: ../include/classes.php:518
 msgid "Include Extra CSS"
 msgstr "Inkludera extra CSS"
 
-#: ../include/classes.php:396
+#: ../include/classes.php:519
 msgid "Header Selector"
 msgstr "ID/Klass för sidhuvud"
 
-#: ../include/classes.php:406
-#: ../include/classes.php:486
+#: ../include/classes.php:529
+#: ../include/classes.php:609
 msgid "Webshop"
 msgstr "E-handel"
 
-#: ../include/classes.php:421
+#: ../include/classes.php:544
 msgid "Preview on Public Page"
 msgstr "Förhandsgranska på publik sida"
 
-#: ../include/classes.php:422
+#: ../include/classes.php:545
 msgid "Preview on Test Page"
 msgstr "Förhandsgranska på testsida"
 
-#: ../include/classes.php:449
+#: ../include/classes.php:572
 msgid "Get yours here"
 msgstr "Hämta din här"
 
-#: ../include/classes.php:459
+#: ../include/classes.php:582
 msgid "This adds basic styling when the Javascript is loaded"
 msgstr "Detta lägger till grundlayouten när Javascript-koden laddas"
 
-#: ../include/classes.php:467
+#: ../include/classes.php:590
 msgid "This adds compatibility styling for the cart when it is open"
 msgstr "Detta lägger till kompatibilitet för varukorgen när den är öppen"
 
-#: ../include/classes.php:489
+#: ../include/classes.php:612
 #: ../manual/index.php:16
 msgid "Manual"
 msgstr ""
 
-#: ../include/classes.php:492
+#: ../include/classes.php:615
 msgid "Settings"
 msgstr "Inställningar"
 
@@ -220,7 +224,7 @@ msgstr "Ladda om"
 msgid "Status"
 msgstr ""
 
-#: ../view/index.php:138
+#: ../view/index.php:45
 msgid "I could not find a Customer Number. Please add one and try again."
 msgstr "Jag kunde inte hitta ett kundnummer. Var vänlig lägg till ett och försök igen."
 
