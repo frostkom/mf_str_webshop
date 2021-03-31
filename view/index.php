@@ -2,7 +2,9 @@
 
 if(!defined('ABSPATH'))
 {
-	$folder = str_replace("/wp-content/plugins/mf_str_webshop/view", "/", dirname(__FILE__));
+	$dirname = dirname(__FILE__);
+	$separator = (strpos($dirname, "/") !== false ? "/" : "\\");
+	$folder = str_replace($separator."wp-content".$separator."plugins".$separator."mf_str_webshop".$separator."view", $separator, $dirname);
 
 	require_once($folder."wp-load.php");
 }

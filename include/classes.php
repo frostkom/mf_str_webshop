@@ -337,7 +337,9 @@ class mf_str_webshop
 
 										if($setting_str_webshop_post_id > 0)
 										{
-											$out .= "<li>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa ".($this->get_header_footer_from_page($setting_str_webshop_post_id) ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".get_permalink($setting_str_webshop_post_id)."'>".__("Public and Contains the Correct Data", $this->lang_key)."</a></li>";
+											$has_header_footer = $this->get_header_footer_from_page($setting_str_webshop_post_id);
+
+											$out .= "<li title='".sprintf(__("The header is %d long and the footer is %d long", $this->lang_key), strlen($this->page_header), strlen($this->page_footer))."'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa ".($has_header_footer ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".get_permalink($setting_str_webshop_post_id)."'>".__("Public and Contains the Correct Data", $this->lang_key)."</a></li>";
 										}
 
 										$out .= "<li>&nbsp;&nbsp;<i class='fa ".(get_option('setting_str_webshop_customer_number') > 0 ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Customer Number", $this->lang_key)."</a></li>
