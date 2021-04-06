@@ -7,6 +7,9 @@ class mf_str_webshop
 		$this->lang_key = 'lang_str_webshop';
 
 		$this->github_settings_url = (is_multisite() ? network_admin_url("settings.php?page=github-updater&tab=github_updater_settings&subtab=github") : admin_url("options-general.php?page=github-updater&tab=github_updater_settings&subtab=github"));
+
+		//$this->github_access_token_start = "409";
+		$this->github_access_token_start = "ghp_i4v";
 	}
 
 	function get_base_path($data = array())
@@ -233,6 +236,11 @@ class mf_str_webshop
 		);
 	}
 
+	function is_correct_github_access_token($github_updater)
+	{
+		return (isset($github_updater['github_access_token']) && $github_updater['github_access_token'] != '' && substr($github_updater['github_access_token'], 0, strlen($this->github_access_token_start)) == $this->github_access_token_start);
+	}
+
 	function get_status($data = array())
 	{
 		if(!isset($data['type'])){		$data['type'] = '';}
@@ -280,12 +288,12 @@ class mf_str_webshop
 							{
 								case 'html':
 									$out .= "<ul>
-										<li>&nbsp;&nbsp;<i class='fa ".(isset($github_updater['github_access_token']) && $github_updater['github_access_token'] != '' ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$this->github_settings_url."'>".__("GitHub.com Access Token", $this->lang_key)."</a></li>
+										<li>&nbsp;&nbsp;<i class='fa ".($this->is_correct_github_access_token($github_updater) ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$this->github_settings_url."'>".__("GitHub.com Access Token", $this->lang_key)."</a></li>
 									</ul>";
 								break;
 
 								case 'menu':
-									if(!isset($github_updater['github_access_token']) || $github_updater['github_access_token'] == '')
+									if($this->is_correct_github_access_token($github_updater) == false)
 									{
 										$status_warnings++;
 									}

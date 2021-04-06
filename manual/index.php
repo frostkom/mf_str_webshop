@@ -53,7 +53,7 @@ echo "<div class='wrap'>
 
 									$github_updater = get_site_option('github_updater');
 
-									if(isset($github_updater['github_access_token']) && $github_updater['github_access_token'] != '' && substr($github_updater['github_access_token'], 0, 3) == "409")
+									if($obj_str_webshop->is_correct_github_access_token($github_updater))
 									{
 										echo sprintf(__("Add %s in the field %s and save", $obj_str_webshop->lang_key), "<code>".$github_updater['github_access_token']."</code>", "GitHub.com Access Token");
 									}
