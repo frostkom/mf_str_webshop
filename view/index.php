@@ -44,7 +44,7 @@ echo $obj_str_webshop->page_header;
 
 	else
 	{
-		$error_text = __("I could not find a Customer Number. Please add one and try again.", $obj_str_webshop->lang_key);
+		$error_text = __("I could not find a Customer Number. Please add one and try again.", 'lang_str_webshop');
 
 		echo get_notification();
 	}

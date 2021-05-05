@@ -4,8 +4,6 @@ class mf_str_webshop
 {
 	function __construct()
 	{
-		$this->lang_key = 'lang_str_webshop';
-
 		$this->github_settings_url = (is_multisite() ? network_admin_url("settings.php?page=github-updater&tab=github_updater_settings&subtab=github") : admin_url("options-general.php?page=github-updater&tab=github_updater_settings&subtab=github"));
 
 		//$this->github_access_token_start = "409";
@@ -214,11 +212,11 @@ class mf_str_webshop
 		else
 		{
 			$out = "<p id='str-ecom'>"
-				.__("We do not have a webshop yet...", $this->lang_key);
+				.__("We do not have a webshop yet...", 'lang_str_webshop');
 
 				if(IS_EDITOR)
 				{
-					$out .= "&nbsp;<a href='".admin_url("options-general.php?page=settings_mf_base#settings_str_webshop")."'>".__("Go to Settings and enter your Customer Number", $this->lang_key)."</a>";
+					$out .= "&nbsp;<a href='".admin_url("options-general.php?page=settings_mf_base#settings_str_webshop")."'>".__("Go to Settings and enter your Customer Number", 'lang_str_webshop')."</a>";
 				}
 
 			$out .= "</p>";
@@ -230,9 +228,9 @@ class mf_str_webshop
 	function get_api_mode_for_select()
 	{
 		return array(
-			'test' => __("Test", $this->lang_key),
-			'live' => __("Live", $this->lang_key),
-			'test_if_logged_in' => __("Test", $this->lang_key)." (".__("If logged in", $this->lang_key).")",
+			'test' => __("Test", 'lang_str_webshop'),
+			'live' => __("Live", 'lang_str_webshop'),
+			'test_if_logged_in' => __("Test", 'lang_str_webshop')." (".__("If logged in", 'lang_str_webshop').")",
 		);
 	}
 
@@ -288,7 +286,7 @@ class mf_str_webshop
 							{
 								case 'html':
 									$out .= "<ul>
-										<li>&nbsp;&nbsp;<i class='fa ".($this->is_correct_github_access_token($github_updater) ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$this->github_settings_url."'>".__("GitHub.com Access Token", $this->lang_key)."</a></li>
+										<li>&nbsp;&nbsp;<i class='fa ".($this->is_correct_github_access_token($github_updater) ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$this->github_settings_url."'>".__("GitHub.com Access Token", 'lang_str_webshop')."</a></li>
 									</ul>";
 								break;
 
@@ -320,7 +318,7 @@ class mf_str_webshop
 							{
 								case 'html':
 									$out .= "<ul>
-										<li>&nbsp;&nbsp;<i class='fa ".($setting_base_update_htaccess == 'yes' ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Automatically Update %s", $this->lang_key)."</a></li>
+										<li>&nbsp;&nbsp;<i class='fa ".($setting_base_update_htaccess == 'yes' ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Automatically Update %s", 'lang_str_webshop')."</a></li>
 									</ul>";
 								break;
 
@@ -341,16 +339,16 @@ class mf_str_webshop
 							{
 								case 'html':
 									$out .= "<ul>
-										<li>&nbsp;&nbsp;<i class='fa ".($setting_str_webshop_post_id > 0 ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Page", $this->lang_key)."</a></li>";
+										<li>&nbsp;&nbsp;<i class='fa ".($setting_str_webshop_post_id > 0 ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Page", 'lang_str_webshop')."</a></li>";
 
 										if($setting_str_webshop_post_id > 0)
 										{
 											$has_header_footer = $this->get_header_footer_from_page($setting_str_webshop_post_id);
 
-											$out .= "<li title='".sprintf(__("The header is %d long and the footer is %d long", $this->lang_key), strlen($this->page_header), strlen($this->page_footer))."'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa ".($has_header_footer ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".get_permalink($setting_str_webshop_post_id)."'>".__("Public and Contains the Correct Data", $this->lang_key)."</a></li>";
+											$out .= "<li title='".sprintf(__("The header is %d long and the footer is %d long", 'lang_str_webshop'), strlen($this->page_header), strlen($this->page_footer))."'>&nbsp;&nbsp;&nbsp;&nbsp;<i class='fa ".($has_header_footer ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".get_permalink($setting_str_webshop_post_id)."'>".__("Public and Contains the Correct Data", 'lang_str_webshop')."</a></li>";
 										}
 
-										$out .= "<li>&nbsp;&nbsp;<i class='fa ".(get_option('setting_str_webshop_customer_number') > 0 ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Customer Number", $this->lang_key)."</a></li>
+										$out .= "<li>&nbsp;&nbsp;<i class='fa ".(get_option('setting_str_webshop_customer_number') > 0 ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Customer Number", 'lang_str_webshop')."</a></li>
 									</ul>";
 								break;
 
@@ -395,7 +393,7 @@ class mf_str_webshop
 			case 'menu':
 				if($status_warnings > 0)
 				{
-					return "&nbsp;<span class='update-plugins' title='".__("Warnings", $this->lang_key)."'>
+					return "&nbsp;<span class='update-plugins' title='".__("Warnings", 'lang_str_webshop')."'>
 						<span>".$status_warnings."</span>
 					</span>";
 				}
@@ -520,13 +518,13 @@ class mf_str_webshop
 		add_settings_section($options_area, "", array($this, $options_area."_callback"), BASE_OPTIONS_PAGE);
 
 		$arr_settings = array(
-			'setting_str_webshop_post_id' => __("Page", $this->lang_key),
-			'setting_str_webshop_api_mode' => __("API Mode", $this->lang_key),
-			'setting_str_webshop_customer_number' => __("Customer Number", $this->lang_key),
-			'setting_str_webshop_google_analytics' => __("Google Analytics", $this->lang_key),
-			'setting_str_webshop_include_css' => __("Include CSS", $this->lang_key),
-			'setting_str_webshop_include_extra_css' => __("Include Extra CSS", $this->lang_key),
-			'setting_str_webshop_header_selector' => __("Header Selector", $this->lang_key),
+			'setting_str_webshop_post_id' => __("Page", 'lang_str_webshop'),
+			'setting_str_webshop_api_mode' => __("API Mode", 'lang_str_webshop'),
+			'setting_str_webshop_customer_number' => __("Customer Number", 'lang_str_webshop'),
+			'setting_str_webshop_google_analytics' => __("Google Analytics", 'lang_str_webshop'),
+			'setting_str_webshop_include_css' => __("Include CSS", 'lang_str_webshop'),
+			'setting_str_webshop_include_extra_css' => __("Include Extra CSS", 'lang_str_webshop'),
+			'setting_str_webshop_header_selector' => __("Header Selector", 'lang_str_webshop'),
 		);
 
 		show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
@@ -536,7 +534,7 @@ class mf_str_webshop
 	{
 		$setting_key = get_setting_key(__FUNCTION__);
 
-		echo settings_header($setting_key, __("Webshop", $this->lang_key));
+		echo settings_header($setting_key, __("Webshop", 'lang_str_webshop'));
 	}
 
 	function setting_str_webshop_post_id_callback()
@@ -551,8 +549,8 @@ class mf_str_webshop
 
 		if($option > 0)
 		{
-			$suffix .= "&nbsp;<a href='".get_permalink($option)."'><i class='fa fa-eye fa-lg' title='".__("Preview on Public Page", $this->lang_key)."'></i></a>"
-			."&nbsp;<a href='".get_site_url()."/wp-content/plugins/mf_str_webshop/view/'><i class='fas fa-hard-hat fa-lg' title='".__("Preview on Test Page", $this->lang_key)."'></i></a>";
+			$suffix .= "&nbsp;<a href='".get_permalink($option)."'><i class='fa fa-eye fa-lg' title='".__("Preview on Public Page", 'lang_str_webshop')."'></i></a>"
+			."&nbsp;<a href='".get_site_url()."/wp-content/plugins/mf_str_webshop/view/'><i class='fas fa-hard-hat fa-lg' title='".__("Preview on Test Page", 'lang_str_webshop')."'></i></a>";
 		}
 
 		echo show_select(array('data' => $arr_data, 'name' => $setting_key, 'value' => $option, 'suffix' => $suffix));
@@ -579,7 +577,7 @@ class mf_str_webshop
 		$setting_key = get_setting_key(__FUNCTION__);
 		$option = get_option($setting_key, get_option('setting_analytics_google'));
 
-		$suffix = ($option == '' ? "<a href='//analytics.google.com/analytics/web/'>".__("Get yours here", $this->lang_key)."</a>" : "");
+		$suffix = ($option == '' ? "<a href='//analytics.google.com/analytics/web/'>".__("Get yours here", 'lang_str_webshop')."</a>" : "");
 
 		echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => "UA-0000000-0", 'suffix' => $suffix));
 	}
@@ -589,7 +587,7 @@ class mf_str_webshop
 		$setting_key = get_setting_key(__FUNCTION__);
 		$option = get_option($setting_key, 'yes');
 
-		echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option, 'description' => __("This adds basic styling when the Javascript is loaded", $this->lang_key)));
+		echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option, 'description' => __("This adds basic styling when the Javascript is loaded", 'lang_str_webshop')));
 	}
 
 	function setting_str_webshop_include_extra_css_callback()
@@ -597,7 +595,7 @@ class mf_str_webshop
 		$setting_key = get_setting_key(__FUNCTION__);
 		$option = get_option($setting_key, 'yes');
 
-		echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option, 'description' => __("This adds compatibility styling for the cart when it is open", $this->lang_key)));
+		echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option, 'description' => __("This adds compatibility styling for the cart when it is open", 'lang_str_webshop')));
 	}
 
 	function setting_str_webshop_header_selector_callback()
@@ -616,13 +614,13 @@ class mf_str_webshop
 
 		$count_message = $this->get_status(array('type' => 'menu'));
 
-		$menu_title = __("Webshop", $this->lang_key);
+		$menu_title = __("Webshop", 'lang_str_webshop');
 		add_menu_page($menu_title, $menu_title.$count_message, $menu_capability, $menu_start, '', 'dashicons-cart', 99);
 
-		$menu_title = __("Manual", $this->lang_key);
+		$menu_title = __("Manual", 'lang_str_webshop');
 		add_submenu_page($menu_start, $menu_title, " - ".$menu_title.$count_message, $menu_capability, $menu_start);
 
-		$menu_title = __("Settings", $this->lang_key);
+		$menu_title = __("Settings", 'lang_str_webshop');
 		add_submenu_page($menu_start, $menu_title, " - ".$menu_title, $menu_capability, admin_url("options-general.php?page=settings_mf_base#settings_str_webshop"));
 	}
 
@@ -678,10 +676,13 @@ class mf_str_webshop
 				break;
 
 				case 'nginx':
-					$update_with = "location ~ /".$base_path."/$ {}\r\n"
-					."\r\n"
-					."location / {\r\n"
-					."	rewrite ^/".$base_path."/(.*)$ ".$subfolder."wp-content/plugins/mf_str_webshop/view/ break;\r\n"
+					$update_with = "";
+
+					$update_with .= "location ~ /".$base_path."/$ {}\r\n"
+					."\r\n";
+					
+					$update_with .= "location / {\r\n"
+					."	rewrite ^/".$base_path."/(.*)$ ".$subfolder."wp-content/plugins/mf_str_webshop/view/index.php last;\r\n"
 					."}";
 				break;
 			}
