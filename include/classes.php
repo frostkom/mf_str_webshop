@@ -4,6 +4,8 @@ class mf_str_webshop
 {
 	function __construct()
 	{
+		$this->post_type = 'str_webshop_page';
+
 		$this->github_settings_url = (is_multisite() ? network_admin_url("settings.php?page=github-updater&tab=github_updater_settings&subtab=github") : admin_url("options-general.php?page=github-updater&tab=github_updater_settings&subtab=github"));
 
 		//$this->github_access_token_start = "409";
@@ -488,12 +490,10 @@ class mf_str_webshop
 
 				if($post_content == '' || (strpos($post_content, "str-ecom") === false && strpos($post_content, "[mf_str_webshop]") === false && strpos($post_content, "wp:fl-builder/layout") === false))
 				{
-					$post_data = array(
+					wp_update_post(array(
 						'ID' => $setting_str_webshop_post_id,
 						'post_content' => $post_content."[mf_str_webshop]",
-					);
-
-					wp_update_post($post_data);
+					));
 				}
 
 				if(!isset($obj_base))
@@ -506,9 +506,230 @@ class mf_str_webshop
 					$this->recommend_config(array('file' => get_home_path().".htaccess", 'html' => ''));
 				}
 			}
+
+			if(1 == 2 && get_option('setting_str_webshop_sitemap_api_activate', 'yes') == 'yes')
+			{
+				/*list($content, $headers) = get_url_content(array(
+					'url' => "",
+					'catch_head' => true,
+				));*/
+				$headers = array(
+					'http_code' => 200,
+				);
+
+				$log_message = "I could not get a successful result from the Sitemap API";
+
+				switch($headers['http_code'])
+				{
+					case 200:
+						//$json = json_decode($content, true);
+						$json = array(
+							array(
+								"name" => "Mc",
+								"url" => "/mc",
+							),
+							array(
+								"name" => "Teori",
+								"url" => "/mc/teori",
+							),
+							array(
+								"name" => "Personbil med släp",
+								"url" => "/personbil med släp",
+							),
+							array(
+								"name" => "Körkortsboken",
+								"url" => "/productdetails/2",
+							),
+							array(
+								"name" => "RiskB 1&2",
+								"url" => "/productdetails/155",
+							),
+						);
+
+						/*[
+							{
+								"name": "Mc",
+								"url": "/mc"
+							},
+							{
+								"name": "Teori",
+								"url": "/mc/teori"
+							},
+							{
+								"name": "Personbil med släp",
+								"url": "/personbil med släp"
+							},
+							{
+								"name": "Körkortsboken",
+								"url": "/productdetails/2"
+							},
+							{
+								"name": "RiskB 1&2",
+								"url": "/productdetails/155"
+							}
+						]*/
+
+						//echo("API Result: ".var_export($json, true));
+
+						foreach($json as $item)
+						{
+							$post_title = $item['name'];
+							$post_slug = trim($item['url'], "/");
+
+							$arr_post_slug = explode("/", $post_slug);
+							$depth_count = count($arr_post_slug);
+
+							$post_parent = 0;
+
+							//echo("Reset Parent: ".$post_parent."<br>");
+
+							foreach($arr_post_slug as $depth => $post_slug)
+							{
+								if($depth == 0 && $post_slug == 'productdetails')
+								{
+									$post_title_temp = __("Product Details", 'lang_str_webshop');
+								}
+
+								else
+								{
+									$post_title_temp = $post_title;
+								}
+
+								$post_title_temp = utf8_encode($post_title_temp);
+								$post_slug = utf8_encode($post_slug);
+
+								$result = $wpdb->get_results($wpdb->prepare("SELECT ID FROM ".$wpdb->posts." WHERE post_type = %s AND post_name = %s", $this->post_type, $post_slug));
+
+								if($wpdb->last_query != '')
+								{
+									if($wpdb->num_rows > 0)
+									{
+										$i = 0;
+
+										foreach($result as $r)
+										{
+											if($i == 0)
+											{
+												if($depth == ($depth_count - 1))
+												{
+													$wpdb->query($wpdb->prepare("UPDATE ".$wpdb->posts." SET post_title = %s, post_name = %s, post_parent = '%d', post_modified = NOW() WHERE ID = '%d'", $post_title_temp, $post_slug, $post_parent, $r->ID));
+
+													//echo "Updated: ".$post_slug." -> ".$post_title_temp."<br>";
+												}
+
+												else
+												{
+													$post_parent = $r->ID;
+
+													//echo "Set Parent: ".$post_slug." -> ".$post_title_temp." -> ".$post_parent."<br>";
+												}
+
+												$i++;
+											}
+
+											else
+											{
+												wp_trash_post($r->ID);
+											}
+										}
+									}
+
+									else
+									{
+										$wpdb->query($wpdb->prepare("INSERT INTO ".$wpdb->posts." SET post_type = %s, post_status = %s, post_title = %s, post_name = %s, post_parent = '%d', post_date = NOW(), post_modified = NOW()", $this->post_type, 'publish', $post_title_temp, $post_slug, $post_parent));
+
+										if($depth == ($depth_count - 1))
+										{
+
+										}
+
+										else
+										{
+											$post_parent = $wpdb->insert_id;
+
+											//echo "Set Parent: ".$post_slug." -> ".$post_title_temp." -> ".$post_parent."<br>";
+										}
+
+										//echo "Create: ".$wpdb->last_query."<br>";
+										//echo "Created: ".$post_slug." -> ".$post_title."<br>";
+									}
+								}
+
+								else
+								{
+									//echo "Not allowed: ".$post_slug." -> ".$post_title." (".$wpdb->prepare("SELECT ID FROM ".$wpdb->posts." WHERE post_type = %s AND post_name = %s", $this->post_type, $post_slug).")<br>";
+								}
+							}
+
+							/*$page_name = $item['name'];
+							$page_url = $item['url'];
+
+							$wpdb->get_results($wpdb->prepare("SELECT pageID FROM ".$wpdb->prefix."str_webshop_sitemap_page WHERE pageName = %s AND pageUrl = %s", $page_name, $page_url));
+
+							if($wpdb->num_rows > 0)
+							{
+								$wpdb->query($wpdb->prepare("UPDATE ".$wpdb->prefix."str_webshop_sitemap_page SET pageUpdated = NOW() WHERE pageName = %s AND pageUrl = %s", $page_name, $page_url));
+							}
+
+							else
+							{
+								$wpdb->query($wpdb->prepare("INSERT INTO ".$wpdb->prefix."str_webshop_sitemap_page SET pageName = %s, pageUrl = %s, pageCreated = NOW(), pageUpdated = NOW()", $page_name, $page_url));
+							}*/
+						}
+
+						do_log($log_message, 'trash');
+					break;
+
+					default:
+						do_log($log_message." (".$content.", ".htmlspecialchars(var_export($headers, true)).")");
+					break;
+				}
+			}
 		}
 
 		$obj_cron->end();
+	}
+
+	function init()
+	{
+		if(1 == 2 && get_option('setting_str_webshop_sitemap_api_activate', 'yes') == 'yes')
+		{
+			$labels = array(
+				'name' => _x(__("Sitemap Pages", 'lang_str_webshop'), 'post type general name'),
+				'singular_name' => _x(__("Sitemap Page", 'lang_str_webshop'), 'post type singular name'),
+				'menu_name' => __("Sitemap Pages", 'lang_str_webshop')
+			);
+
+			$args = array(
+				'labels' => $labels,
+				'public' => true,
+				//'show_ui' => false,
+				//'show_in_menu' => false,
+				//'show_in_nav_menus' => false,
+				//'exclude_from_search' => true,
+				'supports' => array('title'),
+				'hierarchical' => true,
+				'has_archive' => false,
+			);
+
+			$setting_str_webshop_post_id = get_option('setting_str_webshop_post_id');
+
+			if($setting_str_webshop_post_id > 0)
+			{
+				$args['rewrite'] = array(
+					'slug' => mf_get_post_content($setting_str_webshop_post_id, 'post_name'),
+				);
+			}
+
+			register_post_type($this->post_type, $args);
+		}
+
+		else
+		{
+			mf_uninstall_plugin(array(
+				'post_types' => array($this->post_type),
+			));
+		}
 	}
 
 	function settings_str_webshop()
@@ -526,6 +747,11 @@ class mf_str_webshop
 			'setting_str_webshop_include_extra_css' => __("Include Extra CSS", 'lang_str_webshop'),
 			'setting_str_webshop_header_selector' => __("Header Selector", 'lang_str_webshop'),
 		);
+
+		if(1 == 2)
+		{
+			$arr_settings['setting_str_webshop_sitemap_api_activate'] = __("Activate Sitemap API", 'lang_str_webshop');
+		}
 
 		show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
 	}
@@ -604,6 +830,14 @@ class mf_str_webshop
 		$option = get_option($setting_key);
 
 		echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => "#header, .header"));
+	}
+
+	function setting_str_webshop_sitemap_api_activate_callback()
+	{
+		$setting_key = get_setting_key(__FUNCTION__);
+		$option = get_option($setting_key, 'yes');
+
+		echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option));
 	}
 
 	function admin_menu()

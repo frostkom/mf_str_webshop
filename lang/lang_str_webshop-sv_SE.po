@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 07:37+0100\n"
+"POT-Creation-Date: 2021-05-06 12:13+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -15,110 +15,127 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../include/classes.php:214
+#: ../include/classes.php:217
 msgid "We do not have a webshop yet..."
 msgstr "Vi har ingen e-handel ännu..."
 
-#: ../include/classes.php:218
+#: ../include/classes.php:221
 msgid "Go to Settings and enter your Customer Number"
 msgstr "Gå till Inställningarna och ange ett kundnummer"
 
-#: ../include/classes.php:230
-#: ../include/classes.php:232
+#: ../include/classes.php:233
+#: ../include/classes.php:235
 msgid "Test"
 msgstr ""
 
-#: ../include/classes.php:231
+#: ../include/classes.php:234
 msgid "Live"
 msgstr ""
 
-#: ../include/classes.php:232
+#: ../include/classes.php:235
 msgid "If logged in"
 msgstr "Som inloggad"
 
-#: ../include/classes.php:283
+#: ../include/classes.php:291
 msgid "GitHub.com Access Token"
 msgstr ""
 
-#: ../include/classes.php:315
+#: ../include/classes.php:323
 #, php-format
 msgid "Automatically Update %s"
 msgstr "Uppdatera %s automatiskt"
 
-#: ../include/classes.php:336
-#: ../include/classes.php:515
+#: ../include/classes.php:344
+#: ../include/classes.php:755
 msgid "Page"
 msgstr "Sida"
 
-#: ../include/classes.php:342
+#: ../include/classes.php:350
 #, php-format
 msgid "The header is %d long and the footer is %d long"
 msgstr "Sidhuvudet är %d lång och sidfoten är %d lång"
 
-#: ../include/classes.php:342
+#: ../include/classes.php:350
 msgid "Public and Contains the Correct Data"
 msgstr "Publik och innehåller rätt data"
 
-#: ../include/classes.php:345
-#: ../include/classes.php:517
+#: ../include/classes.php:353
+#: ../include/classes.php:757
 msgid "Customer Number"
 msgstr "Kundnummer"
 
-#: ../include/classes.php:390
+#: ../include/classes.php:398
 msgid "Warnings"
 msgstr "Varningar"
 
-#: ../include/classes.php:516
+#: ../include/classes.php:596
+msgid "Product Details"
+msgstr "Produktdetaljer"
+
+#: ../include/classes.php:719
+#: ../include/classes.php:721
+msgid "Sitemap Pages"
+msgstr "Sitemap-sidor"
+
+#: ../include/classes.php:720
+msgid "Sitemap Page"
+msgstr "Sitemap-sida"
+
+#: ../include/classes.php:756
 msgid "API Mode"
 msgstr "API-läge"
 
-#: ../include/classes.php:518
+#: ../include/classes.php:758
 msgid "Google Analytics"
 msgstr ""
 
-#: ../include/classes.php:519
+#: ../include/classes.php:759
 msgid "Include CSS"
 msgstr "Inkludera CSS"
 
-#: ../include/classes.php:520
+#: ../include/classes.php:760
 msgid "Include Extra CSS"
 msgstr "Inkludera extra CSS"
 
-#: ../include/classes.php:521
+#: ../include/classes.php:761
 msgid "Header Selector"
 msgstr "ID/Klass för sidhuvud"
 
-#: ../include/classes.php:531
-#: ../include/classes.php:611
+#: ../include/classes.php:762
+msgid "Activate Sitemap API"
+msgstr "Aktivera Sitemap-API"
+
+#: ../include/classes.php:772
+#: ../include/classes.php:860
 msgid "Webshop"
 msgstr "E-handel"
 
-#: ../include/classes.php:546
+#: ../include/classes.php:787
 msgid "Preview on Public Page"
 msgstr "Förhandsgranska på publik sida"
 
-#: ../include/classes.php:547
+#: ../include/classes.php:788
 msgid "Preview on Test Page"
 msgstr "Förhandsgranska på testsida"
 
-#: ../include/classes.php:574
+#: ../include/classes.php:815
 msgid "Get yours here"
 msgstr "Hämta din här"
 
-#: ../include/classes.php:584
+#: ../include/classes.php:825
 msgid "This adds basic styling when the Javascript is loaded"
 msgstr "Detta lägger till grundlayouten när Javascript-koden laddas"
 
-#: ../include/classes.php:592
+#: ../include/classes.php:833
 msgid "This adds compatibility styling for the cart when it is open"
 msgstr "Detta lägger till kompatibilitet för varukorgen när den är öppen"
 
-#: ../include/classes.php:614
+#: ../include/classes.php:863
 #: ../manual/index.php:16
 msgid "Manual"
 msgstr ""
 
-#: ../include/classes.php:617
+#: ../include/classes.php:866
 msgid "Settings"
 msgstr "Inställningar"
 
