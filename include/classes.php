@@ -159,24 +159,26 @@ class mf_str_webshop
 				case 'test_if_logged_in':
 					if(is_user_logged_in())
 					{
-						$script_url = "https://ecommercetest.str.se/static/js/";
+						$script_url = "https://ecommercetest.str.se";
 					}
 
 					else
 					{
-						$script_url = "https://ecommerce.str.se/static/js/";
+						$script_url = "https://ecommerce.str.se";
 					}
 				break;
 
 				case 'test':
-					$script_url = "https://ecommercetest.str.se/static/js/";
+					$script_url = "https://ecommercetest.str.se";
 				break;
 
 				default:
 				case 'live':
-					$script_url = "https://ecommerce.str.se/static/js/";
+					$script_url = "https://ecommerce.str.se";
 				break;
 			}
+
+			$script_url .= "/static/js/";
 
 			switch($setting_str_webshop_include_css)
 			{
@@ -412,6 +414,8 @@ class mf_str_webshop
 
 		if($obj_cron->is_running == false)
 		{
+			// 
+			###################################
 			$setting_str_webshop_post_id = get_option('setting_str_webshop_post_id');
 			$setting_str_webshop_api_mode = get_option('setting_str_webshop_api_mode');
 			$setting_str_webshop_customer_number = get_option('setting_str_webshop_customer_number');
@@ -506,185 +510,204 @@ class mf_str_webshop
 					$this->recommend_config(array('file' => get_home_path().".htaccess", 'html' => ''));
 				}
 			}
+			###################################
 
-			if(1 == 2 && get_option('setting_str_webshop_sitemap_api_activate', 'yes') == 'yes')
+			//
+			###################################
+			if(get_option('setting_str_webshop_sitemap_api_activate', 'yes') == 'yes')
 			{
-				/*list($content, $headers) = get_url_content(array(
-					'url' => "",
-					'catch_head' => true,
-				));*/
-				$headers = array(
-					'http_code' => 200,
-				);
+				$setting_str_webshop_api_mode = get_option('setting_str_webshop_api_mode', 'live');
+				$setting_str_webshop_customer_number = get_option('setting_str_webshop_customer_number');
 
-				$log_message = "I could not get a successful result from the Sitemap API";
-
-				switch($headers['http_code'])
+				if($setting_str_webshop_customer_number > 0)
 				{
-					case 200:
-						//$json = json_decode($content, true);
-						$json = array(
-							array(
-								"name" => "Mc",
-								"url" => "/mc",
-							),
-							array(
-								"name" => "Teori",
-								"url" => "/mc/teori",
-							),
-							array(
-								"name" => "Personbil med släp",
-								"url" => "/personbil med släp",
-							),
-							array(
-								"name" => "Körkortsboken",
-								"url" => "/productdetails/2",
-							),
-							array(
-								"name" => "RiskB 1&2",
-								"url" => "/productdetails/155",
-							),
-						);
+					switch($setting_str_webshop_api_mode)
+					{
+						case 'test_if_logged_in':
+						case 'test':
+							$api_url = "https://ecommerceapitest.str.se";
+						break;
 
-						/*[
-							{
-								"name": "Mc",
-								"url": "/mc"
-							},
-							{
-								"name": "Teori",
-								"url": "/mc/teori"
-							},
-							{
-								"name": "Personbil med släp",
-								"url": "/personbil med släp"
-							},
-							{
-								"name": "Körkortsboken",
-								"url": "/productdetails/2"
-							},
-							{
-								"name": "RiskB 1&2",
-								"url": "/productdetails/155"
-							}
-						]*/
+						default:
+						case 'live':
+							$api_url = ""; //https://ecommerceapi.str.se
+						break;
+					}
 
-						//echo("API Result: ".var_export($json, true));
+					if($api_url != '')
+					{
+						$api_url .= "/api/sitemap";
 
-						foreach($json as $item)
+						//do_log("API Init: ".$api_url);
+
+						list($content, $headers) = get_url_content(array(
+							'url' => $api_url,
+							'catch_head' => true,
+							'headers' => array(
+								'Authorization: CustomerNumber '.base64_encode($setting_str_webshop_customer_number),
+								'Accept: application/vnd.str.ecommerce.v2+json',
+							),
+						));
+						/*$headers = array(
+							'http_code' => 200,
+						);*/
+
+						$log_message = "I could not get a successful result from the Sitemap API";
+
+						switch($headers['http_code'])
 						{
-							$post_title = $item['name'];
-							$post_slug = trim($item['url'], "/");
+							case 200:
+								$json = json_decode($content, true);
+								/*$json = array(
+									array(
+										"name" => "Mc",
+										"url" => "/mc",
+									),
+									array(
+										"name" => "Teori",
+										"url" => "/mc/teori",
+									),
+									array(
+										"name" => "Personbil med släp",
+										"url" => "/personbil med släp",
+									),
+									array(
+										"name" => "Körkortsboken",
+										"url" => "/productdetails/2",
+									),
+									array(
+										"name" => "RiskB 1&2",
+										"url" => "/productdetails/155",
+									),
+								);*/
 
-							$arr_post_slug = explode("/", $post_slug);
-							$depth_count = count($arr_post_slug);
-
-							$post_parent = 0;
-
-							//echo("Reset Parent: ".$post_parent."<br>");
-
-							foreach($arr_post_slug as $depth => $post_slug)
-							{
-								if($depth == 0 && $post_slug == 'productdetails')
-								{
-									$post_title_temp = __("Product Details", 'lang_str_webshop');
-								}
-
-								else
-								{
-									$post_title_temp = $post_title;
-								}
-
-								$post_title_temp = utf8_encode($post_title_temp);
-								$post_slug = utf8_encode($post_slug);
-
-								$result = $wpdb->get_results($wpdb->prepare("SELECT ID FROM ".$wpdb->posts." WHERE post_type = %s AND post_name = %s", $this->post_type, $post_slug));
-
-								if($wpdb->last_query != '')
-								{
-									if($wpdb->num_rows > 0)
+								/*[
 									{
-										$i = 0;
-
-										foreach($result as $r)
-										{
-											if($i == 0)
-											{
-												if($depth == ($depth_count - 1))
-												{
-													$wpdb->query($wpdb->prepare("UPDATE ".$wpdb->posts." SET post_title = %s, post_name = %s, post_parent = '%d', post_modified = NOW() WHERE ID = '%d'", $post_title_temp, $post_slug, $post_parent, $r->ID));
-
-													//echo "Updated: ".$post_slug." -> ".$post_title_temp."<br>";
-												}
-
-												else
-												{
-													$post_parent = $r->ID;
-
-													//echo "Set Parent: ".$post_slug." -> ".$post_title_temp." -> ".$post_parent."<br>";
-												}
-
-												$i++;
-											}
-
-											else
-											{
-												wp_trash_post($r->ID);
-											}
-										}
+										"name": "Mc",
+										"url": "/mc"
+									},
+									{
+										"name": "Teori",
+										"url": "/mc/teori"
+									},
+									{
+										"name": "Personbil med släp",
+										"url": "/personbil med släp"
+									},
+									{
+										"name": "Körkortsboken",
+										"url": "/productdetails/2"
+									},
+									{
+										"name": "RiskB 1&2",
+										"url": "/productdetails/155"
 									}
+								]*/
 
-									else
+								//do_log("API Result: ".var_export($json, true));
+
+								foreach($json as $item)
+								{
+									$post_title = $item['name'];
+									$post_slug = trim($item['url'], "/");
+
+									$arr_post_slug = explode("/", $post_slug);
+									$depth_count = count($arr_post_slug);
+
+									$post_parent = 0;
+
+									//echo("Reset Parent: ".$post_parent."<br>");
+
+									foreach($arr_post_slug as $depth => $post_slug)
 									{
-										$wpdb->query($wpdb->prepare("INSERT INTO ".$wpdb->posts." SET post_type = %s, post_status = %s, post_title = %s, post_name = %s, post_parent = '%d', post_date = NOW(), post_modified = NOW()", $this->post_type, 'publish', $post_title_temp, $post_slug, $post_parent));
-
-										if($depth == ($depth_count - 1))
+										if($depth == 0 && $post_slug == 'productdetails')
 										{
-
+											$post_title_temp = __("Product Details", 'lang_str_webshop');
 										}
 
 										else
 										{
-											$post_parent = $wpdb->insert_id;
-
-											//echo "Set Parent: ".$post_slug." -> ".$post_title_temp." -> ".$post_parent."<br>";
+											$post_title_temp = $post_title;
 										}
 
-										//echo "Create: ".$wpdb->last_query."<br>";
-										//echo "Created: ".$post_slug." -> ".$post_title."<br>";
+										//$post_title_temp = utf8_encode($post_title_temp);
+										//$post_slug = utf8_encode($post_slug);
+
+										$result = $wpdb->get_results($wpdb->prepare("SELECT ID FROM ".$wpdb->posts." WHERE post_type = %s AND post_name = %s", $this->post_type, $post_slug));
+
+										if($wpdb->last_query != '')
+										{
+											if($wpdb->num_rows > 0)
+											{
+												$i = 0;
+
+												foreach($result as $r)
+												{
+													if($i == 0)
+													{
+														if($depth == ($depth_count - 1))
+														{
+															$wpdb->query($wpdb->prepare("UPDATE ".$wpdb->posts." SET post_title = %s, post_name = %s, post_parent = '%d', post_modified = NOW() WHERE ID = '%d'", $post_title_temp, $post_slug, $post_parent, $r->ID));
+
+															//echo "Updated: ".$post_slug." -> ".$post_title_temp."<br>";
+														}
+
+														else
+														{
+															$post_parent = $r->ID;
+
+															//echo "Set Parent: ".$post_slug." -> ".$post_title_temp." -> ".$post_parent."<br>";
+														}
+
+														$i++;
+													}
+
+													else
+													{
+														wp_trash_post($r->ID);
+													}
+												}
+											}
+
+											else
+											{
+												$wpdb->query($wpdb->prepare("INSERT INTO ".$wpdb->posts." SET post_type = %s, post_status = %s, post_title = %s, post_name = %s, post_parent = '%d', post_date = NOW(), post_modified = NOW()", $this->post_type, 'publish', $post_title_temp, $post_slug, $post_parent));
+
+												if($depth == ($depth_count - 1))
+												{
+
+												}
+
+												else
+												{
+													$post_parent = $wpdb->insert_id;
+
+													//echo "Set Parent: ".$post_slug." -> ".$post_title_temp." -> ".$post_parent."<br>";
+												}
+
+												//echo "Create: ".$wpdb->last_query."<br>";
+												//echo "Created: ".$post_slug." -> ".$post_title."<br>";
+											}
+										}
+
+										else
+										{
+											//echo "Not allowed: ".$post_slug." -> ".$post_title." (".$wpdb->prepare("SELECT ID FROM ".$wpdb->posts." WHERE post_type = %s AND post_name = %s", $this->post_type, $post_slug).")<br>";
+										}
 									}
 								}
 
-								else
-								{
-									//echo "Not allowed: ".$post_slug." -> ".$post_title." (".$wpdb->prepare("SELECT ID FROM ".$wpdb->posts." WHERE post_type = %s AND post_name = %s", $this->post_type, $post_slug).")<br>";
-								}
-							}
+								do_log($log_message, 'trash');
+							break;
 
-							/*$page_name = $item['name'];
-							$page_url = $item['url'];
-
-							$wpdb->get_results($wpdb->prepare("SELECT pageID FROM ".$wpdb->prefix."str_webshop_sitemap_page WHERE pageName = %s AND pageUrl = %s", $page_name, $page_url));
-
-							if($wpdb->num_rows > 0)
-							{
-								$wpdb->query($wpdb->prepare("UPDATE ".$wpdb->prefix."str_webshop_sitemap_page SET pageUpdated = NOW() WHERE pageName = %s AND pageUrl = %s", $page_name, $page_url));
-							}
-
-							else
-							{
-								$wpdb->query($wpdb->prepare("INSERT INTO ".$wpdb->prefix."str_webshop_sitemap_page SET pageName = %s, pageUrl = %s, pageCreated = NOW(), pageUpdated = NOW()", $page_name, $page_url));
-							}*/
+							default:
+								do_log($log_message." (".$content.", ".htmlspecialchars(var_export($headers, true)).")");
+							break;
 						}
-
-						do_log($log_message, 'trash');
-					break;
-
-					default:
-						do_log($log_message." (".$content.", ".htmlspecialchars(var_export($headers, true)).")");
-					break;
+					}
 				}
 			}
+			###################################
 		}
 
 		$obj_cron->end();
@@ -692,7 +715,7 @@ class mf_str_webshop
 
 	function init()
 	{
-		if(1 == 2 && get_option('setting_str_webshop_sitemap_api_activate', 'yes') == 'yes')
+		if(get_option('setting_str_webshop_sitemap_api_activate', 'yes') == 'yes')
 		{
 			$labels = array(
 				'name' => _x(__("Sitemap Pages", 'lang_str_webshop'), 'post type general name'),
@@ -914,7 +937,7 @@ class mf_str_webshop
 
 					$update_with .= "location ~ /".$base_path."/$ {}\r\n"
 					."\r\n";
-					
+
 					$update_with .= "location / {\r\n"
 					."	rewrite ^/".$base_path."/(.*)$ ".$subfolder."wp-content/plugins/mf_str_webshop/view/index.php last;\r\n"
 					."}";
