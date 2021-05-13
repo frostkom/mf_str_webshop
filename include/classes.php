@@ -623,11 +623,13 @@ class mf_str_webshop
 										if($depth == 0 && $post_slug == 'productdetails')
 										{
 											$post_title_temp = __("Product Details", 'lang_str_webshop');
+											$post_status = 'draft';
 										}
 
 										else
 										{
 											$post_title_temp = $post_title;
+											$post_status = 'publish';
 										}
 
 										//$post_title_temp = utf8_encode($post_title_temp);
@@ -671,11 +673,11 @@ class mf_str_webshop
 
 											else
 											{
-												$wpdb->query($wpdb->prepare("INSERT INTO ".$wpdb->posts." SET post_type = %s, post_status = %s, post_title = %s, post_name = %s, post_parent = '%d', post_date = NOW(), post_modified = NOW()", $this->post_type, 'publish', $post_title_temp, $post_slug, $post_parent));
+												$wpdb->query($wpdb->prepare("INSERT INTO ".$wpdb->posts." SET post_type = %s, post_status = %s, post_title = %s, post_name = %s, post_parent = '%d', post_date = NOW(), post_modified = NOW()", $this->post_type, $post_status, $post_title_temp, $post_slug, $post_parent));
 
 												if($depth == ($depth_count - 1))
 												{
-
+													// Do nothing
 												}
 
 												else
