@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-06 12:13+0100\n"
+"POT-Creation-Date: 2021-05-19 15:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -15,127 +15,127 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../include/classes.php:217
+#: ../include/classes.php:219
 msgid "We do not have a webshop yet..."
 msgstr "Vi har ingen e-handel ännu..."
 
-#: ../include/classes.php:221
+#: ../include/classes.php:223
 msgid "Go to Settings and enter your Customer Number"
 msgstr "Gå till Inställningarna och ange ett kundnummer"
 
-#: ../include/classes.php:233
 #: ../include/classes.php:235
+#: ../include/classes.php:237
 msgid "Test"
 msgstr ""
 
-#: ../include/classes.php:234
+#: ../include/classes.php:236
 msgid "Live"
 msgstr ""
 
-#: ../include/classes.php:235
+#: ../include/classes.php:237
 msgid "If logged in"
 msgstr "Som inloggad"
 
-#: ../include/classes.php:291
+#: ../include/classes.php:293
 msgid "GitHub.com Access Token"
 msgstr ""
 
-#: ../include/classes.php:323
+#: ../include/classes.php:325
 #, php-format
 msgid "Automatically Update %s"
 msgstr "Uppdatera %s automatiskt"
 
-#: ../include/classes.php:344
-#: ../include/classes.php:755
+#: ../include/classes.php:346
+#: ../include/classes.php:832
 msgid "Page"
 msgstr "Sida"
 
-#: ../include/classes.php:350
+#: ../include/classes.php:352
 #, php-format
 msgid "The header is %d long and the footer is %d long"
 msgstr "Sidhuvudet är %d lång och sidfoten är %d lång"
 
-#: ../include/classes.php:350
+#: ../include/classes.php:352
 msgid "Public and Contains the Correct Data"
 msgstr "Publik och innehåller rätt data"
 
-#: ../include/classes.php:353
-#: ../include/classes.php:757
+#: ../include/classes.php:355
+#: ../include/classes.php:834
 msgid "Customer Number"
 msgstr "Kundnummer"
 
-#: ../include/classes.php:398
+#: ../include/classes.php:400
 msgid "Warnings"
 msgstr "Varningar"
 
-#: ../include/classes.php:596
+#: ../include/classes.php:690
 msgid "Product Details"
 msgstr "Produktdetaljer"
 
-#: ../include/classes.php:719
-#: ../include/classes.php:721
+#: ../include/classes.php:788
+#: ../include/classes.php:790
 msgid "Sitemap Pages"
 msgstr "Sitemap-sidor"
 
-#: ../include/classes.php:720
+#: ../include/classes.php:789
 msgid "Sitemap Page"
 msgstr "Sitemap-sida"
 
-#: ../include/classes.php:756
+#: ../include/classes.php:833
 msgid "API Mode"
 msgstr "API-läge"
 
-#: ../include/classes.php:758
+#: ../include/classes.php:835
 msgid "Google Analytics"
 msgstr ""
 
-#: ../include/classes.php:759
+#: ../include/classes.php:836
 msgid "Include CSS"
 msgstr "Inkludera CSS"
 
-#: ../include/classes.php:760
+#: ../include/classes.php:837
 msgid "Include Extra CSS"
 msgstr "Inkludera extra CSS"
 
-#: ../include/classes.php:761
+#: ../include/classes.php:838
 msgid "Header Selector"
 msgstr "ID/Klass för sidhuvud"
 
-#: ../include/classes.php:762
+#: ../include/classes.php:843
 msgid "Activate Sitemap API"
 msgstr "Aktivera Sitemap-API"
 
-#: ../include/classes.php:772
-#: ../include/classes.php:860
+#: ../include/classes.php:853
+#: ../include/classes.php:941
 msgid "Webshop"
 msgstr "E-handel"
 
-#: ../include/classes.php:787
+#: ../include/classes.php:868
 msgid "Preview on Public Page"
 msgstr "Förhandsgranska på publik sida"
 
-#: ../include/classes.php:788
+#: ../include/classes.php:869
 msgid "Preview on Test Page"
 msgstr "Förhandsgranska på testsida"
 
-#: ../include/classes.php:815
+#: ../include/classes.php:896
 msgid "Get yours here"
 msgstr "Hämta din här"
 
-#: ../include/classes.php:825
+#: ../include/classes.php:906
 msgid "This adds basic styling when the Javascript is loaded"
 msgstr "Detta lägger till grundlayouten när Javascript-koden laddas"
 
-#: ../include/classes.php:833
+#: ../include/classes.php:914
 msgid "This adds compatibility styling for the cart when it is open"
 msgstr "Detta lägger till kompatibilitet för varukorgen när den är öppen"
 
-#: ../include/classes.php:863
+#: ../include/classes.php:944
 #: ../manual/index.php:16
 msgid "Manual"
 msgstr ""
 
-#: ../include/classes.php:866
+#: ../include/classes.php:947
 msgid "Settings"
 msgstr "Inställningar"
 
@@ -245,6 +245,20 @@ msgstr "Ladda om"
 #: ../manual/index.php:81
 msgid "Status"
 msgstr ""
+
+#: ../manual/index.php:85
+msgid "Version"
+msgstr ""
+
+#: ../manual/index.php:91
+#, php-format
+msgid "The installed version is %s and the latest version on GitHub is %s."
+msgstr "Den installerade versionen är %s och den senaste versionen på GitHub är %s."
+
+#: ../manual/index.php:92
+#, php-format
+msgid "Take a look at the version history %shere%s."
+msgstr "Se versionshistoriken %shär%s."
 
 #: ../view/index.php:47
 msgid "I could not find a Customer Number. Please add one and try again."

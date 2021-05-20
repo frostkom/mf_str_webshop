@@ -8,7 +8,6 @@ class mf_str_webshop
 
 		$this->github_settings_url = (is_multisite() ? network_admin_url("settings.php?page=github-updater&tab=github_updater_settings&subtab=github") : admin_url("options-general.php?page=github-updater&tab=github_updater_settings&subtab=github"));
 
-		//$this->github_access_token_start = "409";
 		$this->github_access_token_start = "ghp_i4v";
 	}
 
@@ -405,6 +404,55 @@ class mf_str_webshop
 		}
 	}
 
+	function get_github_version()
+	{
+		global $wpdb;
+
+		$out = '';
+
+		$meta_value = '';
+
+		if(is_multisite())
+		{
+			$meta_key = $wpdb->get_var($wpdb->prepare("SELECT meta_key FROM ".$wpdb->base_prefix."sitemeta WHERE meta_key LIKE %s AND meta_value LIKE %s", "ghu-%", "%mf_str_webshop%"));
+
+			if($meta_key != '')
+			{
+				$meta_value = get_site_option($meta_key);
+			}
+		}
+
+		else
+		{
+			$meta_key = $wpdb->get_var($wpdb->prepare("SELECT option_name FROM ".$wpdb->prefix."options WHERE option_name LIKE %s AND option_value LIKE %s", "ghu-%", "%mf_str_webshop%"));
+
+			if($meta_key != '')
+			{
+				$meta_value = get_option($meta_key);
+			}
+		}
+
+		foreach($meta_value as $key1 => $value1)
+		{
+			switch($key1)
+			{
+				case 'index.php':
+					foreach($value1 as $key2 => $value2)
+					{
+						switch($key2)
+						{
+							case 'Version':
+								$out .= $value2;
+							break;
+						}
+					}
+				break;
+			}
+		}
+
+		return $out;
+	}
+
 	function cron_base()
 	{
 		global $wpdb;
@@ -414,7 +462,6 @@ class mf_str_webshop
 
 		if($obj_cron->is_running == false)
 		{
-			// 
 			###################################
 			$setting_str_webshop_post_id = get_option('setting_str_webshop_post_id');
 			$setting_str_webshop_api_mode = get_option('setting_str_webshop_api_mode');
@@ -512,7 +559,6 @@ class mf_str_webshop
 			}
 			###################################
 
-			//
 			###################################
 			if(get_option('setting_str_webshop_sitemap_api_activate', 'yes') == 'yes')
 			{
@@ -538,8 +584,6 @@ class mf_str_webshop
 					{
 						$api_url .= "/api/sitemap";
 
-						//do_log("API Init: ".$api_url);
-
 						list($content, $headers) = get_url_content(array(
 							'url' => $api_url,
 							'catch_head' => true,
@@ -548,9 +592,6 @@ class mf_str_webshop
 								'Accept: application/vnd.str.ecommerce.v2+json',
 							),
 						));
-						/*$headers = array(
-							'http_code' => 200,
-						);*/
 
 						$log_message = "I could not get a successful result from the Sitemap API";
 
@@ -558,28 +599,6 @@ class mf_str_webshop
 						{
 							case 200:
 								$json = json_decode($content, true);
-								/*$json = array(
-									array(
-										"name" => "Mc",
-										"url" => "/mc",
-									),
-									array(
-										"name" => "Teori",
-										"url" => "/mc/teori",
-									),
-									array(
-										"name" => "Personbil med släp",
-										"url" => "/personbil med släp",
-									),
-									array(
-										"name" => "Körkortsboken",
-										"url" => "/productdetails/2",
-									),
-									array(
-										"name" => "RiskB 1&2",
-										"url" => "/productdetails/155",
-									),
-								);*/
 
 								/*[
 									{
@@ -616,8 +635,6 @@ class mf_str_webshop
 
 									$post_parent = 0;
 
-									//echo("Reset Parent: ".$post_parent."<br>");
-
 									foreach($arr_post_slug as $depth => $post_slug)
 									{
 										if($depth == 0 && $post_slug == 'productdetails')
@@ -631,9 +648,6 @@ class mf_str_webshop
 											$post_title_temp = $post_title;
 											$post_status = 'publish';
 										}
-
-										//$post_title_temp = utf8_encode($post_title_temp);
-										//$post_slug = utf8_encode($post_slug);
 
 										$result = $wpdb->get_results($wpdb->prepare("SELECT ID FROM ".$wpdb->posts." WHERE post_type = %s AND post_name = %s", $this->post_type, $post_slug));
 
@@ -650,15 +664,11 @@ class mf_str_webshop
 														if($depth == ($depth_count - 1))
 														{
 															$wpdb->query($wpdb->prepare("UPDATE ".$wpdb->posts." SET post_title = %s, post_name = %s, post_parent = '%d', post_modified = NOW() WHERE ID = '%d'", $post_title_temp, $post_slug, $post_parent, $r->ID));
-
-															//echo "Updated: ".$post_slug." -> ".$post_title_temp."<br>";
 														}
 
 														else
 														{
 															$post_parent = $r->ID;
-
-															//echo "Set Parent: ".$post_slug." -> ".$post_title_temp." -> ".$post_parent."<br>";
 														}
 
 														$i++;
@@ -683,18 +693,8 @@ class mf_str_webshop
 												else
 												{
 													$post_parent = $wpdb->insert_id;
-
-													//echo "Set Parent: ".$post_slug." -> ".$post_title_temp." -> ".$post_parent."<br>";
 												}
-
-												//echo "Create: ".$wpdb->last_query."<br>";
-												//echo "Created: ".$post_slug." -> ".$post_title."<br>";
 											}
-										}
-
-										else
-										{
-											//echo "Not allowed: ".$post_slug." -> ".$post_title." (".$wpdb->prepare("SELECT ID FROM ".$wpdb->posts." WHERE post_type = %s AND post_name = %s", $this->post_type, $post_slug).")<br>";
 										}
 									}
 								}

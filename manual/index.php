@@ -81,6 +81,18 @@ echo "<div class='wrap'>
 						<h3 class='hndle'><span>".__("Status", 'lang_str_webshop')."</span></h3>
 						<div class='inside'>".$obj_str_webshop->get_status(array('type' => 'html'))."</div>
 					</div>
+					<div class='postbox'>
+						<h3 class='hndle'><span>".__("Version", 'lang_str_webshop')."</span></h3>
+						<div class='inside'>";
+
+							$plugin_version = get_plugin_version(__FILE__);
+							$github_version = $obj_str_webshop->get_github_version();
+
+							echo "<p>".sprintf(__("The installed version is %s and the latest version on GitHub is %s.", 'lang_str_webshop'), $plugin_version, $github_version)."</p>
+							<p>".sprintf(__("Take a look at the version history %shere%s.", 'lang_str_webshop'), "<a href='//github.com/frostkom/mf_str_webshop/commits/master' rel='external'>", "</a>")."</p>";
+						
+						echo "</div>
+					</div>
 				</div>
 			</div>
 		</form>
