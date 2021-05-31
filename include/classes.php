@@ -6,7 +6,8 @@ class mf_str_webshop
 	{
 		$this->post_type = 'str_webshop_page';
 
-		$this->github_settings_url = (is_multisite() ? network_admin_url("settings.php?page=github-updater&tab=github_updater_settings&subtab=github") : admin_url("options-general.php?page=github-updater&tab=github_updater_settings&subtab=github"));
+		//$this->github_settings_url = (is_multisite() ? network_admin_url("settings.php?page=github-updater&tab=github_updater_settings&subtab=github") : admin_url("options-general.php?page=github-updater&tab=github_updater_settings&subtab=github"));
+		$this->github_settings_url = (is_multisite() ? network_admin_url("settings.php?page=git-updater&tab=git_updater_settings&subtab=github") : admin_url("options-general.php?page=git-updater&tab=git_updater_settings&subtab=github"));
 
 		$this->github_access_token_start = "ghp_i4v";
 	}
@@ -250,7 +251,8 @@ class mf_str_webshop
 		$status_warnings = 0;
 
 		$arr_plugins = array(
-			'github-updater/github-updater.php' => "GitHub Updater",
+			//'github-updater/github-updater.php' => "GitHub Updater",
+			'git-updater/git-updater.php' => "GitHub Updater",
 			'mf_base/index.php' => "MF Base",
 			'mf_str_webshop/index.php' => "MF STR Webshop",
 		);
@@ -282,8 +284,9 @@ class mf_str_webshop
 				{
 					switch($key)
 					{
-						case 'github-updater/github-updater.php':
-							$github_updater = get_site_option('github_updater');
+						//case 'github-updater/github-updater.php':
+						case 'git-updater/git-updater.php':
+							$github_updater = get_site_option('git_updater');
 
 							switch($data['type'])
 							{
@@ -462,6 +465,7 @@ class mf_str_webshop
 
 		if($obj_cron->is_running == false)
 		{
+			// Get settings from page with str-ecom code
 			###################################
 			$setting_str_webshop_post_id = get_option('setting_str_webshop_post_id');
 			$setting_str_webshop_api_mode = get_option('setting_str_webshop_api_mode');
@@ -559,6 +563,7 @@ class mf_str_webshop
 			}
 			###################################
 
+			// Sync API
 			###################################
 			if(get_option('setting_str_webshop_sitemap_api_activate', 'yes') == 'yes')
 			{
@@ -576,7 +581,7 @@ class mf_str_webshop
 
 						default:
 						case 'live':
-							$api_url = ""; //https://ecommerceapi.str.se
+							$api_url = "https://ecommerceapi.str.se";
 						break;
 					}
 
@@ -616,10 +621,6 @@ class mf_str_webshop
 									{
 										"name": "Körkortsboken",
 										"url": "/productdetails/2"
-									},
-									{
-										"name": "RiskB 1&2",
-										"url": "/productdetails/155"
 									}
 								]*/
 
@@ -710,6 +711,48 @@ class mf_str_webshop
 				}
 			}
 			###################################
+
+			// Notify user when a new version is available
+			###################################
+			$setting_str_webshop_new_version_action = get_option('setting_str_webshop_new_version_action');
+			$setting_str_webshop_new_version_action = array_map('trim', explode(",", $setting_str_webshop_new_version_action));
+
+			if(count($setting_str_webshop_new_version_action) > 0)
+			{
+				$option_str_webshop_notified_version = get_option('option_str_webshop_notified_version');
+				$plugin_version = get_plugin_version(__FILE__);
+				$github_version = $this->get_github_version();
+
+				if(version_compare($github_version, $plugin_version, ">") && version_compare($github_version, $option_str_webshop_notified_version, ">"))
+				{
+					foreach($setting_str_webshop_new_version_action as $user_email)
+					{
+						$blog_name = get_bloginfo('name');
+
+						//$user_data = get_userdata($user_id);
+						//$mail_to = $user_data->user_email;
+
+						$mail_to = $user_email;
+						$mail_subject = sprintf(__("A new version of %s is available on %s", 'lang_str_webshop'), "MF STR Webshop", $blog_name);
+						$mail_content = sprintf(__("The version %s is now available for update on %s and the version history can be read on %sGitHub%s", 'lang_str_webshop'), $github_version, "<a href='".(is_multisite() ? network_admin_url("plugins.php") : admin_url("plugins.php"))."'>".$blog_name."</a>", "<a href='https://github.com/frostkom/mf_str_webshop/commits/master'>", "</a>");
+
+						$sent = send_email(array('to' => $mail_to, 'subject' => $mail_subject, 'content' => $mail_content));
+
+						if($sent)
+						{
+							// Do nothing
+						}
+
+						else
+						{
+							do_log(sprintf("I could not send the message regarding a new version of %s to %s", "MF STR Webshop", $mail_to));
+						}
+					}
+
+					update_option('option_str_webshop_notified_version', $github_version, 'no');
+				}
+			}
+			###################################
 		}
 
 		$obj_cron->end();
@@ -727,7 +770,7 @@ class mf_str_webshop
 
 			$args = array(
 				'labels' => $labels,
-				'public' => true,
+				'public' => does_post_exists(array('post_type' => $this->post_type)),
 				//'show_ui' => false,
 				//'show_in_menu' => false,
 				//'show_in_nav_menus' => false,
@@ -759,8 +802,10 @@ class mf_str_webshop
 
 	function settings_str_webshop()
 	{
-		$options_area = __FUNCTION__;
+		$options_area_orig = $options_area = __FUNCTION__;
 
+		// Generic
+		############################
 		add_settings_section($options_area, "", array($this, $options_area."_callback"), BASE_OPTIONS_PAGE);
 
 		$arr_settings = array(
@@ -768,17 +813,39 @@ class mf_str_webshop
 			'setting_str_webshop_api_mode' => __("API Mode", 'lang_str_webshop'),
 			'setting_str_webshop_customer_number' => __("Customer Number", 'lang_str_webshop'),
 			'setting_str_webshop_google_analytics' => __("Google Analytics", 'lang_str_webshop'),
+		);
+
+		show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
+		############################
+
+		// Style
+		############################
+		$options_area = $options_area_orig."_style";
+
+		add_settings_section($options_area, "", array($this, $options_area."_callback"), BASE_OPTIONS_PAGE);
+
+		$arr_settings = array(
 			'setting_str_webshop_include_css' => __("Include CSS", 'lang_str_webshop'),
 			'setting_str_webshop_include_extra_css' => __("Include Extra CSS", 'lang_str_webshop'),
 			'setting_str_webshop_header_selector' => __("Header Selector", 'lang_str_webshop'),
 		);
 
-		if(1 == 2)
-		{
-			$arr_settings['setting_str_webshop_sitemap_api_activate'] = __("Activate Sitemap API", 'lang_str_webshop');
-		}
+		show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
+		############################
+
+		// Advanced
+		############################
+		$options_area = $options_area_orig."_advanced";
+
+		add_settings_section($options_area, "", array($this, $options_area."_callback"), BASE_OPTIONS_PAGE);
+
+		$arr_settings = array(
+			'setting_str_webshop_sitemap_api_activate' => __("Activate Sitemap API", 'lang_str_webshop'),
+			'setting_str_webshop_new_version_action' => __("New Version Notification", 'lang_str_webshop'),
+		);
 
 		show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
+		############################
 	}
 
 	function settings_str_webshop_callback()
@@ -788,82 +855,112 @@ class mf_str_webshop
 		echo settings_header($setting_key, __("Webshop", 'lang_str_webshop'));
 	}
 
-	function setting_str_webshop_post_id_callback()
-	{
-		$setting_key = get_setting_key(__FUNCTION__);
-		$option = get_option($setting_key);
-
-		$arr_data = array();
-		get_post_children(array('add_choose_here' => true), $arr_data);
-
-		$suffix = get_option_page_suffix(array('value' => $option));
-
-		if($option > 0)
+		function setting_str_webshop_post_id_callback()
 		{
-			$suffix .= "&nbsp;<a href='".get_permalink($option)."'><i class='fa fa-eye fa-lg' title='".__("Preview on Public Page", 'lang_str_webshop')."'></i></a>"
-			."&nbsp;<a href='".get_site_url()."/wp-content/plugins/mf_str_webshop/view/'><i class='fas fa-hard-hat fa-lg' title='".__("Preview on Test Page", 'lang_str_webshop')."'></i></a>";
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key);
+
+			$arr_data = array();
+			get_post_children(array('add_choose_here' => true), $arr_data);
+
+			$suffix = get_option_page_suffix(array('value' => $option));
+
+			if($option > 0)
+			{
+				$suffix .= "&nbsp;<a href='".get_permalink($option)."'><i class='fa fa-eye fa-lg' title='".__("Preview on Public Page", 'lang_str_webshop')."'></i></a>"
+				."&nbsp;<a href='".get_site_url()."/wp-content/plugins/mf_str_webshop/view/'><i class='fas fa-hard-hat fa-lg' title='".__("Preview on Test Page", 'lang_str_webshop')."'></i></a>";
+			}
+
+			echo show_select(array('data' => $arr_data, 'name' => $setting_key, 'value' => $option, 'suffix' => $suffix));
 		}
 
-		echo show_select(array('data' => $arr_data, 'name' => $setting_key, 'value' => $option, 'suffix' => $suffix));
-	}
+		function setting_str_webshop_api_mode_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key, 'live');
 
-	function setting_str_webshop_api_mode_callback()
+			echo show_select(array('data' => $this->get_api_mode_for_select(), 'name' => $setting_key, 'value' => $option));
+		}
+
+		function setting_str_webshop_customer_number_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key);
+
+			echo show_textfield(array('type' => 'number', 'name' => $setting_key, 'value' => $option));
+		}
+
+		function setting_str_webshop_google_analytics_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key, get_option('setting_analytics_google'));
+
+			$suffix = ($option == '' ? "<a href='//analytics.google.com/analytics/web/'>".__("Get yours here", 'lang_str_webshop')."</a>" : "");
+
+			echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => "UA-0000000-0", 'suffix' => $suffix));
+		}
+
+	function settings_str_webshop_style_callback()
 	{
 		$setting_key = get_setting_key(__FUNCTION__);
-		$option = get_option($setting_key, 'live');
 
-		echo show_select(array('data' => $this->get_api_mode_for_select(), 'name' => $setting_key, 'value' => $option));
+		echo settings_header($setting_key, __("Webshop", 'lang_str_webshop')." - ".__("Style", 'lang_str_webshop'));
 	}
 
-	function setting_str_webshop_customer_number_callback()
+		function setting_str_webshop_include_css_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key, 'yes');
+
+			echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option, 'description' => __("This adds basic styling when the Javascript is loaded", 'lang_str_webshop')));
+		}
+
+		function setting_str_webshop_include_extra_css_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key, 'yes');
+
+			echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option, 'description' => __("This adds compatibility styling for the cart when it is open", 'lang_str_webshop')));
+		}
+
+		function setting_str_webshop_header_selector_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key);
+
+			echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => "#header, .header"));
+		}
+
+	function settings_str_webshop_advanced_callback()
 	{
 		$setting_key = get_setting_key(__FUNCTION__);
-		$option = get_option($setting_key);
 
-		echo show_textfield(array('type' => 'number', 'name' => $setting_key, 'value' => $option));
+		echo settings_header($setting_key, __("Webshop", 'lang_str_webshop')." - ".__("Advanced", 'lang_str_webshop'));
 	}
 
-	function setting_str_webshop_google_analytics_callback()
-	{
-		$setting_key = get_setting_key(__FUNCTION__);
-		$option = get_option($setting_key, get_option('setting_analytics_google'));
+		function setting_str_webshop_sitemap_api_activate_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key, 'yes');
 
-		$suffix = ($option == '' ? "<a href='//analytics.google.com/analytics/web/'>".__("Get yours here", 'lang_str_webshop')."</a>" : "");
+			echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option));
+		}
 
-		echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => "UA-0000000-0", 'suffix' => $suffix));
-	}
+		function setting_str_webshop_new_version_action_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key);
 
-	function setting_str_webshop_include_css_callback()
-	{
-		$setting_key = get_setting_key(__FUNCTION__);
-		$option = get_option($setting_key, 'yes');
+			$description = "";
 
-		echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option, 'description' => __("This adds basic styling when the Javascript is loaded", 'lang_str_webshop')));
-	}
+			if($option == '') // || is_array($option) && count($option) == 0
+			{
+				$description = "<i class='fa fa-exclamation-triangle yellow display_warning'></i> ".__("Please choose who to notify when a new version is available", 'lang_str_webshop');
+			}
 
-	function setting_str_webshop_include_extra_css_callback()
-	{
-		$setting_key = get_setting_key(__FUNCTION__);
-		$option = get_option($setting_key, 'yes');
-
-		echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option, 'description' => __("This adds compatibility styling for the cart when it is open", 'lang_str_webshop')));
-	}
-
-	function setting_str_webshop_header_selector_callback()
-	{
-		$setting_key = get_setting_key(__FUNCTION__);
-		$option = get_option($setting_key);
-
-		echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => "#header, .header"));
-	}
-
-	function setting_str_webshop_sitemap_api_activate_callback()
-	{
-		$setting_key = get_setting_key(__FUNCTION__);
-		$option = get_option($setting_key, 'yes');
-
-		echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option));
-	}
+			//echo show_select(array('data' => get_users_for_select(array('add_choose_here' => false)), 'name' => $setting_key."[]", 'value' => $option, 'description' => $description));
+			echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => get_placeholder_email(), 'description' => $description));
+		}
 
 	function admin_menu()
 	{
