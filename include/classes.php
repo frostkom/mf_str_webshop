@@ -435,22 +435,37 @@ class mf_str_webshop
 			}
 		}
 
-		foreach($meta_value as $key1 => $value1)
+		if(is_array($meta_value))
 		{
-			switch($key1)
+			//do_log("GitHub version: ".var_export($meta_value, true));
+
+			foreach($meta_value as $key1 => $value1)
 			{
-				case 'index.php':
-					foreach($value1 as $key2 => $value2)
-					{
-						switch($key2)
+				switch($key1)
+				{
+					case 'mf_str_webshop':
+						foreach($value1 as $key2 => $value2)
 						{
-							case 'Version':
-								$out .= $value2;
-							break;
+							switch($key2)
+							{
+								case 'Version':
+									$out .= $value2;
+								break;
+							}
 						}
-					}
-				break;
+					break;
+				}
 			}
+		}
+
+		/*else
+		{
+			do_log("Could not find GitHub version: ".$wpdb->last_query);
+		}*/
+
+		if($out == '')
+		{
+			$out = "<em>(".__("unknown", 'lang_str_webshop').")</em>";
 		}
 
 		return $out;

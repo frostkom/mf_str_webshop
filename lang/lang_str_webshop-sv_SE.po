@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-25 08:56+0100\n"
+"POT-Creation-Date: 2021-05-31 08:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -46,7 +46,7 @@ msgid "Automatically Update %s"
 msgstr "Uppdatera %s automatiskt"
 
 #: ../include/classes.php:348
-#: ../include/classes.php:813
+#: ../include/classes.php:817
 msgid "Page"
 msgstr "Sida"
 
@@ -60,7 +60,7 @@ msgid "Public and Contains the Correct Data"
 msgstr "Publik och innehåller rätt data"
 
 #: ../include/classes.php:357
-#: ../include/classes.php:815
+#: ../include/classes.php:819
 msgid "Customer Number"
 msgstr "Kundnummer"
 
@@ -68,102 +68,106 @@ msgstr "Kundnummer"
 msgid "Warnings"
 msgstr "Varningar"
 
-#: ../include/classes.php:647
+#: ../include/classes.php:458
+msgid "unknown"
+msgstr "okänd"
+
+#: ../include/classes.php:648
 msgid "Product Details"
 msgstr "Produktdetaljer"
 
-#: ../include/classes.php:737
+#: ../include/classes.php:741
 #, php-format
 msgid "A new version of %s is available on %s"
 msgstr "En ny version av %s är tillgänglig på %s"
 
-#: ../include/classes.php:738
+#: ../include/classes.php:742
 #, php-format
 msgid "The version %s is now available for update on %s and the version history can be read on %sGitHub%s"
 msgstr "Versionen %s är nu tillgänglig för uppdatering på %s och versionshistoriken kan läsas på %sGitHub%s"
 
-#: ../include/classes.php:767
-#: ../include/classes.php:769
+#: ../include/classes.php:771
+#: ../include/classes.php:773
 msgid "Sitemap Pages"
 msgstr "Sitemap-sidor"
 
-#: ../include/classes.php:768
+#: ../include/classes.php:772
 msgid "Sitemap Page"
 msgstr "Sitemap-sida"
 
-#: ../include/classes.php:814
+#: ../include/classes.php:818
 msgid "API Mode"
 msgstr "API-läge"
 
-#: ../include/classes.php:816
+#: ../include/classes.php:820
 msgid "Google Analytics"
 msgstr ""
 
-#: ../include/classes.php:829
+#: ../include/classes.php:833
 msgid "Include CSS"
 msgstr "Inkludera CSS"
 
-#: ../include/classes.php:830
+#: ../include/classes.php:834
 msgid "Include Extra CSS"
 msgstr "Inkludera extra CSS"
 
-#: ../include/classes.php:831
+#: ../include/classes.php:835
 msgid "Header Selector"
 msgstr "ID/Klass för sidhuvud"
 
-#: ../include/classes.php:844
+#: ../include/classes.php:848
 msgid "Activate Sitemap API"
 msgstr "Aktivera Sitemap-API"
 
-#: ../include/classes.php:845
+#: ../include/classes.php:849
 msgid "New Version Notification"
 msgstr "Meddelande om ny version"
 
-#: ../include/classes.php:856
-#: ../include/classes.php:908
-#: ../include/classes.php:939
-#: ../include/classes.php:973
+#: ../include/classes.php:860
+#: ../include/classes.php:912
+#: ../include/classes.php:943
+#: ../include/classes.php:978
 msgid "Webshop"
 msgstr "E-handel"
 
-#: ../include/classes.php:871
+#: ../include/classes.php:875
 msgid "Preview on Public Page"
 msgstr "Förhandsgranska på publik sida"
 
-#: ../include/classes.php:872
+#: ../include/classes.php:876
 msgid "Preview on Test Page"
 msgstr "Förhandsgranska på testsida"
 
-#: ../include/classes.php:899
+#: ../include/classes.php:903
 msgid "Get yours here"
 msgstr "Hämta din här"
 
-#: ../include/classes.php:908
+#: ../include/classes.php:912
 msgid "Style"
 msgstr "Layout"
 
-#: ../include/classes.php:916
+#: ../include/classes.php:920
 msgid "This adds basic styling when the Javascript is loaded"
 msgstr "Detta lägger till grundlayouten när Javascript-koden laddas"
 
-#: ../include/classes.php:924
+#: ../include/classes.php:928
 msgid "This adds compatibility styling for the cart when it is open"
 msgstr "Detta lägger till kompatibilitet för varukorgen när den är öppen"
 
-#: ../include/classes.php:939
+#: ../include/classes.php:943
 msgid "Advanced"
 msgstr "Avancerat"
 
-#: ../include/classes.php:959
+#: ../include/classes.php:963
 msgid "Please choose who to notify when a new version is available"
 msgstr "Välj vem som ska få meddelande när en ny version finns tillgänglig"
 
-#: ../include/classes.php:976
+#: ../include/classes.php:981
 #: ../manual/index.php:16
 msgid "Manual"
 msgstr ""
 
-#: ../include/classes.php:979
+#: ../include/classes.php:984
 msgid "Settings"
 msgstr "Inställningar"
 
