@@ -968,12 +968,11 @@ class mf_str_webshop
 
 			$description = "";
 
-			if($option == '') // || is_array($option) && count($option) == 0
+			if($option == '')
 			{
-				$description = "<i class='fa fa-exclamation-triangle yellow display_warning'></i> ".__("Please choose who to notify when a new version is available", 'lang_str_webshop');
+				$description = __("Please choose who to notify when a new version is available", 'lang_str_webshop'); //"<i class='fa fa-exclamation-triangle yellow display_warning'></i> ".
 			}
 
-			//echo show_select(array('data' => get_users_for_select(array('add_choose_here' => false)), 'name' => $setting_key."[]", 'value' => $option, 'description' => $description));
 			echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => get_placeholder_email(), 'description' => $description));
 		}
 
