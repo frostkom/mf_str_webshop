@@ -996,6 +996,17 @@ class mf_str_webshop
 
 	function wp_head()
 	{
+		global $post;
+
+		if(isset($post->ID) && $post->ID == get_option('setting_str_webshop_post_id'))
+		{
+			// WP native
+			remove_action('wp_head', 'rel_canonical');
+
+			// Yoast
+			//add_filter('wpseo_canonical', '__return_false', 10, 1);
+		}
+
 		if(get_option('setting_str_webshop_include_extra_css') != 'no')
 		{
 			$plugin_include_url = plugin_dir_url(__FILE__);
