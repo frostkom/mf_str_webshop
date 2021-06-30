@@ -742,25 +742,25 @@ class mf_str_webshop
 				{
 					foreach($setting_str_webshop_new_version_action as $user_email)
 					{
-						$blog_name = get_bloginfo('name');
-
-						//$user_data = get_userdata($user_id);
-						//$mail_to = $user_data->user_email;
-
-						$mail_to = $user_email;
-						$mail_subject = sprintf(__("A new version of %s is available on %s", 'lang_str_webshop'), "MF STR Webshop", $blog_name);
-						$mail_content = sprintf(__("The version %s is now available for update on %s and the version history can be read on %sGitHub%s", 'lang_str_webshop'), $github_version, "<a href='".(is_multisite() ? network_admin_url("plugins.php") : admin_url("plugins.php"))."'>".$blog_name."</a>", "<a href='https://github.com/frostkom/mf_str_webshop/commits/master'>", "</a>");
-
-						$sent = send_email(array('to' => $mail_to, 'subject' => $mail_subject, 'content' => $mail_content));
-
-						if($sent)
+						if($user_email != '')
 						{
-							// Do nothing
-						}
+							$blog_name = get_bloginfo('name');
 
-						else
-						{
-							do_log(sprintf("I could not send the message regarding a new version of %s to %s", "MF STR Webshop", $mail_to));
+							$mail_to = $user_email;
+							$mail_subject = sprintf(__("A new version of %s is available on %s", 'lang_str_webshop'), "MF STR Webshop", $blog_name);
+							$mail_content = sprintf(__("The version %s is now available for update on %s and the version history can be read on %sGitHub%s", 'lang_str_webshop'), $github_version, "<a href='".(is_multisite() ? network_admin_url("plugins.php") : admin_url("plugins.php"))."'>".$blog_name."</a>", "<a href='https://github.com/frostkom/mf_str_webshop/commits/master'>", "</a>");
+
+							$sent = send_email(array('to' => $mail_to, 'subject' => $mail_subject, 'content' => $mail_content));
+
+							if($sent)
+							{
+								// Do nothing
+							}
+
+							else
+							{
+								do_log(sprintf("I could not send the message regarding a new version of %s to %s", "MF STR Webshop", var_export($setting_str_webshop_new_version_action, true)." -> ".$mail_to));
+							}
 						}
 					}
 
@@ -1004,7 +1004,7 @@ class mf_str_webshop
 			remove_action('wp_head', 'rel_canonical');
 
 			// Yoast
-			//add_filter('wpseo_canonical', '__return_false', 10, 1);
+			add_filter('wpseo_canonical', '__return_false', 10, 1);
 		}
 
 		if(get_option('setting_str_webshop_include_extra_css') != 'no')
