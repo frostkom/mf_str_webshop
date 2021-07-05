@@ -1064,6 +1064,7 @@ class mf_str_webshop
 
 					$update_with .= "location / {\r\n"
 					."	rewrite ^/".$base_path."/(.*)$ ".$subfolder."wp-content/plugins/mf_str_webshop/view/index.php last;\r\n"
+					//."	rewrite ^".$subfolder."wp-content/plugins/mf_str_webshop/view/(.*)$ ".$subfolder."wp-content/plugins/mf_str_webshop/view/index.php last;\r\n"
 					."}";
 				break;
 			}
