@@ -292,7 +292,7 @@ class mf_str_webshop
 							{
 								case 'html':
 									$out .= "<ul>
-										<li>&nbsp;&nbsp;<i class='fa ".($this->is_correct_github_access_token($github_updater) ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$this->github_settings_url."'>".__("GitHub.com Access Token", 'lang_str_webshop')."</a></li>
+										<li>&nbsp;&nbsp;<i class='fa ".($this->is_correct_github_access_token($github_updater) ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$this->github_settings_url."'>".sprintf(__("%s Access Token", 'lang_str_webshop'), "GitHub.com")."</a></li>
 									</ul>";
 								break;
 
@@ -855,6 +855,7 @@ class mf_str_webshop
 		add_settings_section($options_area, "", array($this, $options_area."_callback"), BASE_OPTIONS_PAGE);
 
 		$arr_settings = array(
+			'setting_str_webshop_disable_canonical' => __("Disable Canonical", 'lang_str_webshop'),
 			'setting_str_webshop_sitemap_api_activate' => __("Activate Sitemap API", 'lang_str_webshop'),
 			'setting_str_webshop_new_version_action' => __("New Version Notification", 'lang_str_webshop'),
 		);
@@ -953,6 +954,14 @@ class mf_str_webshop
 		echo settings_header($setting_key, __("Webshop", 'lang_str_webshop')." - ".__("Advanced", 'lang_str_webshop'));
 	}
 
+		function setting_str_webshop_disable_canonical_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key, 'no');
+
+			echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option));
+		}
+		
 		function setting_str_webshop_sitemap_api_activate_callback()
 		{
 			$setting_key = get_setting_key(__FUNCTION__);
@@ -998,7 +1007,7 @@ class mf_str_webshop
 	{
 		global $post;
 
-		if(isset($post->ID) && $post->ID == get_option('setting_str_webshop_post_id'))
+		if(isset($post->ID) && $post->ID == get_option('setting_str_webshop_post_id') && get_option('setting_str_webshop_disable_canonical') == 'yes')
 		{
 			// WP native
 			remove_action('wp_head', 'rel_canonical');

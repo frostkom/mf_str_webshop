@@ -3,7 +3,7 @@
 Plugin Name: MF STR Webshop
 Plugin URI: https://github.com/frostkom/mf_str_webshop
 Description: Wordpress plugin that adds support for an STR webshop
-Version: 1.5.9
+Version: 1.5.10
 Licence: GPLv2 or later
 Author: Martin Fors
 Author URI: https://frostkom.se
@@ -49,7 +49,7 @@ if(function_exists('is_plugin_active') && is_plugin_active("mf_base/index.php"))
 
 		mf_uninstall_plugin(array(
 			'post_types' => array($obj_str_webshop->post_type),
-			'options' => array('setting_str_webshop_post_id', 'setting_str_webshop_api_mode', 'setting_str_webshop_customer_number', 'setting_str_webshop_google_analytics', 'setting_str_webshop_include_css', 'setting_str_webshop_include_extra_css', 'setting_str_webshop_header_selector', 'setting_str_webshop_sitemap_api_activate', 'setting_str_webshop_new_version_action', 'option_str_webshop_notified_version'),
+			'options' => array('setting_str_webshop_post_id', 'setting_str_webshop_api_mode', 'setting_str_webshop_customer_number', 'setting_str_webshop_google_analytics', 'setting_str_webshop_include_css', 'setting_str_webshop_include_extra_css', 'setting_str_webshop_header_selector', 'setting_str_webshop_sitemap_api_activate', 'setting_str_webshop_new_version_action', 'option_str_webshop_notified_version', 'setting_str_webshop_disable_canonical'),
 		));
 	}
 }

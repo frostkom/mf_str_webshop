@@ -55,16 +55,16 @@ echo "<div class='wrap'>
 
 									if($obj_str_webshop->is_correct_github_access_token($github_updater))
 									{
-										echo sprintf(__("Add %s in the field %s and save", 'lang_str_webshop'), "<code>".$github_updater['github_access_token']."</code>", "GitHub.com Access Token");
+										echo sprintf(__("Add %s in the field %s and save", 'lang_str_webshop'), "<code>".$github_updater['github_access_token']."</code>", sprintf(__("%s Access Token", 'lang_str_webshop'), "GitHub.com"));
 									}
 
 									else
 									{
-										echo sprintf(__("Contact an admin and ask for the %s. Then add it in the field %s and save", 'lang_str_webshop'), "GitHub.com Access Token", "GitHub.com Access Token");
+										echo sprintf(__("Contact an admin and ask for the %s. Then add it in the field %s and save", 'lang_str_webshop'), sprintf(__("%s Access Token", 'lang_str_webshop'), "GitHub.com"), sprintf(__("%s Access Token", 'lang_str_webshop'), "GitHub.com"));
 									}
 
 								echo "</li>
-								<li>".sprintf(__("If the tab %s and field %s is not immediately visible, be patient and go back in a few minutes to check", 'lang_str_webshop'), "GitHub", "GitHub.com Access Token")."</li>
+								<li>".sprintf(__("If the tab %s and field %s is not immediately visible, be patient and go back in a few minutes to check", 'lang_str_webshop'), "GitHub", sprintf(__("%s Access Token", 'lang_str_webshop'), "GitHub.com"))."</li>
 							</ol>
 						</div>
 					</div>
