@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 10:32+0100\n"
+"POT-Creation-Date: 2021-12-16 09:30+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -103,10 +103,6 @@ msgstr "Sitemap-sida"
 msgid "API Mode"
 msgstr "API-läge"
 
-#: ../include/classes.php:830
-msgid "Google Analytics"
-msgstr ""
-
 #: ../include/classes.php:843
 msgid "Include CSS"
 msgstr "Inkludera CSS"
@@ -178,6 +174,10 @@ msgstr ""
 #: ../include/classes.php:1002
 msgid "Settings"
 msgstr "Inställningar"
+
+#: ../include/style_category_text.php:16
+msgid "Loading"
+msgstr "Laddar"
 
 #: ../manual/index.php:22
 msgid "Install webshop on a site"
@@ -303,9 +303,6 @@ msgstr "Se versionshistoriken %shär%s."
 #: ../view/index.php:47
 msgid "I could not find a Customer Number. Please add one and try again."
 msgstr "Jag kunde inte hitta ett kundnummer. Var vänlig lägg till ett och försök igen."
-
-#~ msgid "Log"
-#~ msgstr "Logg"
 
 #~ msgid "Delete All"
 #~ msgstr "Radera alla"

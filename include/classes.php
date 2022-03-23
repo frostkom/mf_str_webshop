@@ -26,6 +26,8 @@ class mf_str_webshop
 
 	function get_header_footer_from_page($setting_str_webshop_post_id)
 	{
+		$this->page_header = $this->page_footer = "";
+
 		//
 		##########################
 		/*list($content, $headers) = get_url_content(array(
@@ -67,6 +69,11 @@ class mf_str_webshop
 				else if(strpos($content, "id='str-ecom'"))
 				{
 					list($part_one, $part_two) = explode("id='str-ecom'", $content);
+				}
+
+				else if(strpos($content, "id=str-ecom "))
+				{
+					list($part_one, $part_two) = explode("id=str-ecom ", $content);
 				}
 
 				else
@@ -827,7 +834,7 @@ class mf_str_webshop
 			'setting_str_webshop_post_id' => __("Page", 'lang_str_webshop'),
 			'setting_str_webshop_api_mode' => __("API Mode", 'lang_str_webshop'),
 			'setting_str_webshop_customer_number' => __("Customer Number", 'lang_str_webshop'),
-			'setting_str_webshop_google_analytics' => __("Google Analytics", 'lang_str_webshop'),
+			'setting_str_webshop_google_analytics' => "Google Analytics",
 		);
 
 		show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
@@ -961,7 +968,7 @@ class mf_str_webshop
 
 			echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option));
 		}
-		
+
 		function setting_str_webshop_sitemap_api_activate_callback()
 		{
 			$setting_key = get_setting_key(__FUNCTION__);
@@ -1007,13 +1014,32 @@ class mf_str_webshop
 	{
 		global $post;
 
-		if(isset($post->ID) && $post->ID == get_option('setting_str_webshop_post_id') && get_option('setting_str_webshop_disable_canonical') == 'yes')
+		if(isset($post->ID) && $post->ID == get_option('setting_str_webshop_post_id'))
 		{
-			// WP native
-			remove_action('wp_head', 'rel_canonical');
+			if(get_option('setting_str_webshop_disable_canonical') == 'yes')
+			{
+				// WP native
+				remove_action('wp_head', 'rel_canonical');
 
-			// Yoast
-			add_filter('wpseo_canonical', '__return_false', 10, 1);
+				// Yoast
+				add_filter('wpseo_canonical', '__return_false', 10, 1);
+			}
+
+			// Test this before use
+			/*global $obj_base;
+
+			if(!isset($obj_base))
+			{
+				$obj_base = new mf_base();
+			}
+
+			$obj_base->load_font_awesome(array('type' => 'external', 'plugin_include_url' => plugins_url()."/mf_base/include/", 'plugin_version' => $plugin_version));*/
+
+			$plugin_include_url = plugin_dir_url(__FILE__);
+			$plugin_version = get_plugin_version(__FILE__);
+
+			mf_enqueue_style('style_str_webshop', $plugin_include_url."style_category_text.php", $plugin_version);
+			mf_enqueue_script('script_str_webshop', $plugin_include_url."script_category_text.js", $plugin_version);
 		}
 
 		if(get_option('setting_str_webshop_include_extra_css') != 'no')
@@ -1023,6 +1049,14 @@ class mf_str_webshop
 
 			mf_enqueue_style('style_str_webshop', $plugin_include_url."style.css", $plugin_version);
 		}
+
+		/*if($has_custom_style)
+		{
+			$plugin_include_url = plugin_dir_url(__FILE__);
+			$plugin_version = get_plugin_version(__FILE__);
+
+			mf_enqueue_style('style_str_webshop', $plugin_include_url."style.php", $plugin_version);
+		}*/
 	}
 
 	function shortcode_str_webshop()

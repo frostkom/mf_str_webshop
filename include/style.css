@@ -43,4 +43,9 @@
 	{
 		height: calc(100% - 12rem) !important;
 	}
+
+	#str-ecom .campaigns
+	{
+		display: none;
+	}
 }
