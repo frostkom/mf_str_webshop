@@ -850,6 +850,7 @@ class mf_str_webshop
 			'setting_str_webshop_include_css' => __("Include CSS", 'lang_str_webshop'),
 			'setting_str_webshop_include_extra_css' => __("Include Extra CSS", 'lang_str_webshop'),
 			'setting_str_webshop_header_selector' => __("Header Selector", 'lang_str_webshop'),
+			//'setting_str_webshop_replace_campaigns' => __("Replace Campaigns with Catergory Text", 'lang_str_webshop'),
 		);
 
 		show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
@@ -954,6 +955,14 @@ class mf_str_webshop
 			echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => "#header, .header"));
 		}
 
+		/*function setting_str_webshop_replace_campaigns_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key, 'yes');
+
+			echo show_select(array('data' => get_yes_no_for_select(), 'name' => $setting_key, 'value' => $option));
+		}*/
+
 	function settings_str_webshop_advanced_callback()
 	{
 		$setting_key = get_setting_key(__FUNCTION__);
@@ -1035,11 +1044,14 @@ class mf_str_webshop
 
 			$obj_base->load_font_awesome(array('type' => 'external', 'plugin_include_url' => plugins_url()."/mf_base/include/", 'plugin_version' => $plugin_version));*/
 
-			$plugin_include_url = plugin_dir_url(__FILE__);
-			$plugin_version = get_plugin_version(__FILE__);
+			/*if(get_option('setting_str_webshop_replace_campaigns', 'yes') == 'yes')
+			{
+				$plugin_include_url = plugin_dir_url(__FILE__);
+				$plugin_version = get_plugin_version(__FILE__);
 
-			mf_enqueue_style('style_str_webshop', $plugin_include_url."style_category_text.php", $plugin_version);
-			mf_enqueue_script('script_str_webshop', $plugin_include_url."script_category_text.js", $plugin_version);
+				mf_enqueue_style('style_str_webshop', $plugin_include_url."style_category_text.php", $plugin_version);
+				mf_enqueue_script('script_str_webshop', $plugin_include_url."script_category_text.js", $plugin_version);
+			}*/
 		}
 
 		if(get_option('setting_str_webshop_include_extra_css') != 'no')
