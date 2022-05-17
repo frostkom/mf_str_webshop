@@ -891,8 +891,8 @@ class mf_str_webshop
 
 			if($option > 0)
 			{
-				$suffix .= "&nbsp;<a href='".get_permalink($option)."'><i class='fa fa-eye fa-lg' title='".__("Preview on Public Page", 'lang_str_webshop')."'></i></a>"
-				."&nbsp;<a href='".get_site_url()."/wp-content/plugins/mf_str_webshop/view/'><i class='fas fa-hard-hat fa-lg' title='".__("Preview on Test Page", 'lang_str_webshop')."'></i></a>";
+				//$suffix .= "&nbsp;<a href='".get_permalink($option)."'><i class='fa fa-eye fa-lg' title='".__("Preview on Public Page", 'lang_str_webshop')."'></i></a>";
+				$suffix .= "&nbsp;<a href='".get_site_url()."/wp-content/plugins/mf_str_webshop/view/'><i class='fas fa-hard-hat fa-lg' title='".__("Preview on Test Page", 'lang_str_webshop')."'></i></a>";
 			}
 
 			echo show_select(array('data' => $arr_data, 'name' => $setting_key, 'value' => $option, 'suffix' => $suffix));
@@ -951,6 +951,12 @@ class mf_str_webshop
 		{
 			$setting_key = get_setting_key(__FUNCTION__);
 			$option = get_option($setting_key);
+
+			if($option != '' && strpos($option, "{"))
+			{
+				list($option, $rest) = explode("{", $option);
+				$option = trim($option);
+			}
 
 			echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => "#header, .header"));
 		}
@@ -1013,10 +1019,10 @@ class mf_str_webshop
 		add_menu_page($menu_title, $menu_title.$count_message, $menu_capability, $menu_start, '', 'dashicons-cart', 99);
 
 		$menu_title = __("Manual", 'lang_str_webshop');
-		add_submenu_page($menu_start, $menu_title, " - ".$menu_title.$count_message, $menu_capability, $menu_start);
+		add_submenu_page($menu_start, $menu_title, $menu_title.$count_message, $menu_capability, $menu_start);
 
 		$menu_title = __("Settings", 'lang_str_webshop');
-		add_submenu_page($menu_start, $menu_title, " - ".$menu_title, $menu_capability, admin_url("options-general.php?page=settings_mf_base#settings_str_webshop"));
+		add_submenu_page($menu_start, $menu_title, $menu_title, $menu_capability, admin_url("options-general.php?page=settings_mf_base#settings_str_webshop"));
 	}
 
 	function wp_head()
