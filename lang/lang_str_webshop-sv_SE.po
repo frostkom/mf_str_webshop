@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-19 10:07+0100\n"
+"POT-Creation-Date: 2022-12-20 13:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -115,10 +115,6 @@ msgstr "Inkludera extra CSS"
 msgid "Header Selector"
 msgstr "ID/Klass för sidhuvud"
 
-#: ../include/classes.php:853
-msgid "Replace Campaigns with Catergory Text"
-msgstr "Ersätt kampanjer med kategoritext"
-
 #: ../include/classes.php:866
 msgid "Disable Canonical"
 msgstr "Stäng av 'Canonical'"
@@ -133,14 +129,10 @@ msgstr "Meddelande om ny version"
 
 #: ../include/classes.php:879
 #: ../include/classes.php:931
-#: ../include/classes.php:970
-#: ../include/classes.php:1012
+#: ../include/classes.php:976
+#: ../include/classes.php:1018
 msgid "Webshop"
 msgstr "E-handel"
-
-#: ../include/classes.php:894
-msgid "Preview on Public Page"
-msgstr "Förhandsgranska på publik sida"
 
 #: ../include/classes.php:895
 msgid "Preview on Test Page"
@@ -162,20 +154,20 @@ msgstr "Detta lägger till grundlayouten när Javascript-koden laddas"
 msgid "This adds compatibility styling for the cart when it is open"
 msgstr "Detta lägger till kompatibilitet för varukorgen när den är öppen"
 
-#: ../include/classes.php:970
+#: ../include/classes.php:976
 msgid "Advanced"
 msgstr "Avancerat"
 
-#: ../include/classes.php:998
+#: ../include/classes.php:1004
 msgid "Please choose who to notify when a new version is available"
 msgstr "Välj vem som ska få meddelande när en ny version finns tillgänglig"
 
-#: ../include/classes.php:1015
+#: ../include/classes.php:1021
 #: ../manual/index.php:16
 msgid "Manual"
 msgstr ""
 
-#: ../include/classes.php:1018
+#: ../include/classes.php:1024
 msgid "Settings"
 msgstr "Inställningar"
 
@@ -280,7 +272,7 @@ msgstr "Skicka instruktioner"
 
 #: ../manual/index.php:76
 msgid "If you want to send any of the instructions below to someone else, add their site URL here to change all links below"
-msgstr "Om du vill skicka någon av instruktionern till någon annan, lägg in deras URL här för att ändra alla länkar"
+msgstr "Om du vill skicka någon av instruktionerna till någon annan, lägg in deras URL här för att ändra alla länkar"
 
 #: ../manual/index.php:77
 msgid "Reload"
@@ -307,6 +299,12 @@ msgstr "Se versionshistoriken %shär%s."
 #: ../view/index.php:47
 msgid "I could not find a Customer Number. Please add one and try again."
 msgstr "Jag kunde inte hitta ett kundnummer. Var vänlig lägg till ett och försök igen."
+
+#~ msgid "Replace Campaigns with Catergory Text"
+#~ msgstr "Ersätt kampanjer med kategoritext"
+
+#~ msgid "Preview on Public Page"
+#~ msgstr "Förhandsgranska på publik sida"
 
 #~ msgid "Delete All"
 #~ msgstr "Radera alla"
