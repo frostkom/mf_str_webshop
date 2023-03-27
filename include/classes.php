@@ -4,7 +4,8 @@ class mf_str_webshop
 {
 	function __construct()
 	{
-		$this->post_type = 'str_webshop_page';
+		$this->meta_prefix = 'str_webshop_';
+		$this->post_type = $this->meta_prefix.'page';
 
 		//$this->github_settings_url = (is_multisite() ? network_admin_url("settings.php?page=github-updater&tab=github_updater_settings&subtab=github") : admin_url("options-general.php?page=github-updater&tab=github_updater_settings&subtab=github"));
 		$this->github_settings_url = (is_multisite() ? network_admin_url("settings.php?page=git-updater&tab=git_updater_settings&subtab=github") : admin_url("options-general.php?page=git-updater&tab=git_updater_settings&subtab=github"));
@@ -234,6 +235,15 @@ class mf_str_webshop
 		}
 
 		return $out;
+	}
+
+	function get_type_for_select()
+	{
+		return array(
+			'old' => __("Old", 'lang_str_webshop'),
+			'iframe' => __("iFrame", 'lang_str_webshop'),
+			'api' => __("API", 'lang_str_webshop'),
+		);
 	}
 
 	function get_api_mode_for_select()
@@ -784,34 +794,37 @@ class mf_str_webshop
 	{
 		if(get_option('setting_str_webshop_sitemap_api_activate', 'yes') == 'yes')
 		{
-			$labels = array(
-				'name' => _x(__("Sitemap Pages", 'lang_str_webshop'), 'post type general name'),
-				'singular_name' => _x(__("Sitemap Page", 'lang_str_webshop'), 'post type singular name'),
-				'menu_name' => __("Sitemap Pages", 'lang_str_webshop')
-			);
-
-			$args = array(
-				'labels' => $labels,
-				'public' => does_post_exists(array('post_type' => $this->post_type)),
-				//'show_ui' => false,
-				//'show_in_menu' => false,
-				//'show_in_nav_menus' => false,
-				//'exclude_from_search' => true,
-				'supports' => array('title'),
-				'hierarchical' => true,
-				'has_archive' => false,
-			);
-
-			$setting_str_webshop_post_id = get_option('setting_str_webshop_post_id');
-
-			if($setting_str_webshop_post_id > 0)
+			if(get_option('setting_str_webshop_version', 'old') == 'old')
 			{
-				$args['rewrite'] = array(
-					'slug' => mf_get_post_content($setting_str_webshop_post_id, 'post_name'),
+				$labels = array(
+					'name' => _x(__("Sitemap Pages", 'lang_str_webshop'), 'post type general name'),
+					'singular_name' => _x(__("Sitemap Page", 'lang_str_webshop'), 'post type singular name'),
+					'menu_name' => __("Sitemap Pages", 'lang_str_webshop')
 				);
-			}
 
-			register_post_type($this->post_type, $args);
+				$args = array(
+					'labels' => $labels,
+					'public' => does_post_exists(array('post_type' => $this->post_type)),
+					//'show_ui' => false,
+					//'show_in_menu' => false,
+					//'show_in_nav_menus' => false,
+					//'exclude_from_search' => true,
+					'supports' => array('title'),
+					'hierarchical' => true,
+					'has_archive' => false,
+				);
+
+				$setting_str_webshop_post_id = get_option('setting_str_webshop_post_id');
+
+				if($setting_str_webshop_post_id > 0)
+				{
+					$args['rewrite'] = array(
+						'slug' => mf_get_post_content($setting_str_webshop_post_id, 'post_name'),
+					);
+				}
+
+				register_post_type($this->post_type, $args);
+			}
 		}
 
 		else
@@ -830,46 +843,63 @@ class mf_str_webshop
 		############################
 		add_settings_section($options_area, "", array($this, $options_area."_callback"), BASE_OPTIONS_PAGE);
 
-		$arr_settings = array(
-			'setting_str_webshop_post_id' => __("Page", 'lang_str_webshop'),
-			'setting_str_webshop_api_mode' => __("API Mode", 'lang_str_webshop'),
-			'setting_str_webshop_customer_number' => __("Customer Number", 'lang_str_webshop'),
-			'setting_str_webshop_google_analytics' => "Google Analytics",
-		);
+		$arr_settings = array();
+
+		$arr_settings['setting_str_webshop_version'] = __("Version", 'lang_str_webshop');
+
+		$setting_str_webshop_version = get_option('setting_str_webshop_version', 'old');
+
+		switch($setting_str_webshop_version)
+		{
+			default:
+			case 'old':
+				$arr_settings['setting_str_webshop_post_id'] = __("Page", 'lang_str_webshop');
+				$arr_settings['setting_str_webshop_api_mode'] = __("API Mode", 'lang_str_webshop');
+				$arr_settings['setting_str_webshop_customer_number'] = __("Customer Number", 'lang_str_webshop');
+				$arr_settings['setting_str_webshop_google_analytics'] = "Google Analytics";
+			break;
+
+			case 'iframe':
+				$arr_settings['setting_str_webshop_iframe_url'] = __("URL", 'lang_str_webshop');
+			break;
+		}
 
 		show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
 		############################
 
-		// Style
-		############################
-		$options_area = $options_area_orig."_style";
+		if($setting_str_webshop_version == 'old')
+		{
+			// Style
+			############################
+			$options_area = $options_area_orig."_style";
 
-		add_settings_section($options_area, "", array($this, $options_area."_callback"), BASE_OPTIONS_PAGE);
+			add_settings_section($options_area, "", array($this, $options_area."_callback"), BASE_OPTIONS_PAGE);
 
-		$arr_settings = array(
-			'setting_str_webshop_include_css' => __("Include CSS", 'lang_str_webshop'),
-			'setting_str_webshop_include_extra_css' => __("Include Extra CSS", 'lang_str_webshop'),
-			'setting_str_webshop_header_selector' => __("Header Selector", 'lang_str_webshop'),
-			//'setting_str_webshop_replace_campaigns' => __("Replace Campaigns with Catergory Text", 'lang_str_webshop'),
-		);
+			$arr_settings = array(
+				'setting_str_webshop_include_css' => __("Include CSS", 'lang_str_webshop'),
+				'setting_str_webshop_include_extra_css' => __("Include Extra CSS", 'lang_str_webshop'),
+				'setting_str_webshop_header_selector' => __("Header Selector", 'lang_str_webshop'),
+				//'setting_str_webshop_replace_campaigns' => __("Replace Campaigns with Catergory Text", 'lang_str_webshop'),
+			);
 
-		show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
-		############################
+			show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
+			############################
 
-		// Advanced
-		############################
-		$options_area = $options_area_orig."_advanced";
+			// Advanced
+			############################
+			$options_area = $options_area_orig."_advanced";
 
-		add_settings_section($options_area, "", array($this, $options_area."_callback"), BASE_OPTIONS_PAGE);
+			add_settings_section($options_area, "", array($this, $options_area."_callback"), BASE_OPTIONS_PAGE);
 
-		$arr_settings = array(
-			'setting_str_webshop_disable_canonical' => __("Disable Canonical", 'lang_str_webshop'),
-			'setting_str_webshop_sitemap_api_activate' => __("Activate Sitemap API", 'lang_str_webshop'),
-			'setting_str_webshop_new_version_action' => __("New Version Notification", 'lang_str_webshop'),
-		);
+			$arr_settings = array(
+				'setting_str_webshop_disable_canonical' => __("Disable Canonical", 'lang_str_webshop'),
+				'setting_str_webshop_sitemap_api_activate' => __("Activate Sitemap API", 'lang_str_webshop'),
+				'setting_str_webshop_new_version_action' => __("New Version Notification", 'lang_str_webshop'),
+			);
 
-		show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
-		############################
+			show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
+			############################
+		}
 	}
 
 	function settings_str_webshop_callback()
@@ -879,6 +909,16 @@ class mf_str_webshop
 		echo settings_header($setting_key, __("Webshop", 'lang_str_webshop'));
 	}
 
+		function setting_str_webshop_version_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key, 'live');
+
+			echo show_select(array('data' => $this->get_type_for_select(), 'name' => $setting_key, 'value' => $option));
+		}
+
+	/* Old */
+	#######################
 		function setting_str_webshop_post_id_callback()
 		{
 			$setting_key = get_setting_key(__FUNCTION__);
@@ -901,7 +941,7 @@ class mf_str_webshop
 		function setting_str_webshop_api_mode_callback()
 		{
 			$setting_key = get_setting_key(__FUNCTION__);
-			$option = get_option($setting_key, 'live');
+			$option = get_option($setting_key, 'old');
 
 			echo show_select(array('data' => $this->get_api_mode_for_select(), 'name' => $setting_key, 'value' => $option));
 		}
@@ -1006,6 +1046,18 @@ class mf_str_webshop
 
 			echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => get_placeholder_email(), 'description' => $description));
 		}
+	#######################
+
+	/**/
+	#######################
+		function setting_str_webshop_iframe_url_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key);
+
+			echo show_textfield(array('type' => 'url', 'name' => $setting_key, 'value' => $option));
+		}
+	#######################
 
 	function admin_menu()
 	{
@@ -1029,57 +1081,85 @@ class mf_str_webshop
 	{
 		global $post;
 
-		if(isset($post->ID) && $post->ID == get_option('setting_str_webshop_post_id'))
+		$plugin_include_url = plugin_dir_url(__FILE__);
+		$plugin_version = get_plugin_version(__FILE__);
+
+		switch(get_option('setting_str_webshop_version', 'old'))
 		{
-			if(get_option('setting_str_webshop_disable_canonical') == 'yes')
-			{
-				// WP native
-				remove_action('wp_head', 'rel_canonical');
+			default:
+			case 'old':
+				if(isset($post->ID) && $post->ID == get_option('setting_str_webshop_post_id'))
+				{
+					if(get_option('setting_str_webshop_disable_canonical') == 'yes')
+					{
+						// WP native
+						remove_action('wp_head', 'rel_canonical');
 
-				// Yoast
-				add_filter('wpseo_canonical', '__return_false', 10, 1);
-			}
+						// Yoast
+						add_filter('wpseo_canonical', '__return_false', 10, 1);
+					}
 
-			// Test this before use
-			/*global $obj_base;
+					// Test this before use
+					/*global $obj_base;
 
-			if(!isset($obj_base))
-			{
-				$obj_base = new mf_base();
-			}
+					if(!isset($obj_base))
+					{
+						$obj_base = new mf_base();
+					}
 
-			$obj_base->load_font_awesome(array('type' => 'external', 'plugin_include_url' => plugins_url()."/mf_base/include/", 'plugin_version' => $plugin_version));*/
+					$obj_base->load_font_awesome(array('type' => 'external', 'plugin_include_url' => plugins_url()."/mf_base/include/", 'plugin_version' => $plugin_version));*/
 
-			/*if(get_option('setting_str_webshop_replace_campaigns', 'yes') == 'yes')
-			{
-				$plugin_include_url = plugin_dir_url(__FILE__);
-				$plugin_version = get_plugin_version(__FILE__);
+					/*if(get_option('setting_str_webshop_replace_campaigns', 'yes') == 'yes')
+					{
+						mf_enqueue_style('style_str_webshop_category_text', $plugin_include_url."style_category_text.php", $plugin_version);
+						mf_enqueue_script('script_str_webshop_category_text', $plugin_include_url."script_category_text.js", $plugin_version);
+					}*/
 
-				mf_enqueue_style('style_str_webshop', $plugin_include_url."style_category_text.php", $plugin_version);
-				mf_enqueue_script('script_str_webshop', $plugin_include_url."script_category_text.js", $plugin_version);
-			}*/
+					if(get_option('setting_str_webshop_include_extra_css') != 'no')
+					{
+						mf_enqueue_style('style_str_webshop_extra', $plugin_include_url."style_extra.css", $plugin_version);
+					}
+
+					/*if($has_custom_style)
+					{
+						mf_enqueue_style('style_str_webshop_custom', $plugin_include_url."style.php", $plugin_version);
+					}*/
+				}
+			break;
+
+			case 'iframe':
+				mf_enqueue_style('style_str_webshop_iframe', $plugin_include_url."style_iframe.css", $plugin_version);
+			break;
 		}
-
-		if(get_option('setting_str_webshop_include_extra_css') != 'no')
-		{
-			$plugin_include_url = plugin_dir_url(__FILE__);
-			$plugin_version = get_plugin_version(__FILE__);
-
-			mf_enqueue_style('style_str_webshop', $plugin_include_url."style.css", $plugin_version);
-		}
-
-		/*if($has_custom_style)
-		{
-			$plugin_include_url = plugin_dir_url(__FILE__);
-			$plugin_version = get_plugin_version(__FILE__);
-
-			mf_enqueue_style('style_str_webshop', $plugin_include_url."style.php", $plugin_version);
-		}*/
 	}
 
 	function shortcode_str_webshop()
 	{
-		return $this->get_view_code();
+		$setting_str_webshop_version = get_option('setting_str_webshop_version', 'old');
+
+		switch($setting_str_webshop_version)
+		{
+			default:
+			case 'old':
+				$out = $this->get_view_code();
+			break;
+
+			case 'iframe':
+				$setting_str_webshop_iframe_url = get_option('setting_str_webshop_iframe_url');
+
+				if($setting_str_webshop_iframe_url != '')
+				{
+					$out = "<iframe class='str_webshop_iframe' src='".$setting_str_webshop_iframe_url."'>";
+				}
+
+				else
+				{
+					$out = "<em>".__("There is no content to display here yet", 'lang_str_webshop')."</em>";
+				}
+			break;
+		}
+
+		return $out;
 	}
 
 	function recommend_config($data)
@@ -1093,49 +1173,79 @@ class mf_str_webshop
 
 		if(!isset($data['file'])){		$data['file'] = '';}
 
-		if(get_option('setting_str_webshop_post_id') > 0)
+		switch(get_option('setting_str_webshop_version', 'old'))
 		{
-			$subfolder = get_url_part(array('type' => 'path'));
-			$base_path = trim($this->get_base_path(), "/");
+			default:
+			case 'old':
+				if(get_option('setting_str_webshop_post_id') > 0)
+				{
+					$subfolder = get_url_part(array('type' => 'path'));
+					$base_path = trim($this->get_base_path(), "/");
 
-			switch($obj_base->get_server_type())
-			{
-				default:
-				case 'apache':
-					$update_with = "<IfModule mod_rewrite.c>\r\n"
-					."	RewriteEngine On\r\n";
-
-					/*if($subfolder != "")
+					switch($obj_base->get_server_type())
 					{
-						$update_with .= "	RewriteBase ".$subfolder."\r\n";
-					}*/
+						default:
+						case 'apache':
+							$update_with = "<IfModule mod_rewrite.c>\r\n"
+							."	RewriteEngine On\r\n";
 
-					$update_with .= "\r\n"
-					."	RewriteCond %{REQUEST_URI} !^/".$base_path."/$\r\n"
-					."	RewriteCond %{REQUEST_URI} ^/".$base_path."/(.*)$\r\n"
-					."	RewriteRule (.*) ".$subfolder."wp-content/plugins/mf_str_webshop/view/ [L]\r\n"
-					."</IfModule>";
-				break;
+							/*if($subfolder != "")
+							{
+								$update_with .= "	RewriteBase ".$subfolder."\r\n";
+							}*/
 
-				case 'nginx':
-					$update_with = "";
+							$update_with .= "\r\n"
+							."	RewriteCond %{REQUEST_URI} !^/".$base_path."/$\r\n"
+							."	RewriteCond %{REQUEST_URI} ^/".$base_path."/(.*)$\r\n"
+							."	RewriteRule (.*) ".$subfolder."wp-content/plugins/mf_str_webshop/view/ [L]\r\n"
+							."</IfModule>";
+						break;
 
-					$update_with .= "location ~ /".$base_path."/$ {}\r\n"
-					."\r\n";
+						case 'nginx':
+							$update_with = "";
 
-					$update_with .= "location / {\r\n"
-					."	rewrite ^/".$base_path."/(.*)$ ".$subfolder."wp-content/plugins/mf_str_webshop/view/index.php last;\r\n"
-					//."	rewrite ^".$subfolder."wp-content/plugins/mf_str_webshop/view/(.*)$ ".$subfolder."wp-content/plugins/mf_str_webshop/view/index.php last;\r\n"
-					."}";
-				break;
-			}
+							$update_with .= "location ~ /".$base_path."/$ {}\r\n"
+							."\r\n";
 
-			$data['html'] .= $obj_base->update_config(array(
-				'plugin_name' => "MF STR Webshop",
-				'file' => $data['file'],
-				'update_with' => $update_with,
-				'auto_update' => true,
-			));
+							$update_with .= "location / {\r\n"
+							."	rewrite ^/".$base_path."/(.*)$ ".$subfolder."wp-content/plugins/mf_str_webshop/view/index.php last;\r\n"
+							//."	rewrite ^".$subfolder."wp-content/plugins/mf_str_webshop/view/(.*)$ ".$subfolder."wp-content/plugins/mf_str_webshop/view/index.php last;\r\n"
+							."}";
+						break;
+					}
+
+					$data['html'] .= $obj_base->update_config(array(
+						'plugin_name' => "MF STR Webshop",
+						'file' => $data['file'],
+						'update_with' => $update_with,
+						'auto_update' => true,
+					));
+				}
+			break;
+
+			case 'iframe':
+				$subfolder = get_url_part(array('type' => 'path'));
+				$base_path = trim($this->get_base_path(), "/");
+
+				switch($obj_base->get_server_type())
+				{
+					default:
+					case 'apache':
+						$update_with = "";
+					break;
+
+					case 'nginx':
+						$update_with = "";
+					break;
+				}
+
+				$data['html'] .= $obj_base->update_config(array(
+					'plugin_name' => "MF STR Webshop",
+					'file' => $data['file'],
+					'update_with' => $update_with,
+					'auto_update' => true,
+				));
+			break;
 		}
 
 		return $data;

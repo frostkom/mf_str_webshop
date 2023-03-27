@@ -1,0 +1,10 @@
+@media all
+{
+	.str_webshop_iframe
+	{
+		border: .1em solid #999;
+		border-radius: .5em;
+		height: 100vh;
+		width: 100%;
+	}
+}
