@@ -862,6 +862,10 @@ class mf_str_webshop
 			case 'iframe':
 				$arr_settings['setting_str_webshop_iframe_url'] = __("URL", 'lang_str_webshop');
 			break;
+
+			case 'api':
+				$arr_settings['setting_str_webshop_office_id'] = __("Office ID", 'lang_str_webshop');
+			break;
 		}
 
 		show_settings_fields(array('area' => $options_area, 'object' => $this, 'settings' => $arr_settings));
@@ -1048,7 +1052,7 @@ class mf_str_webshop
 		}
 	#######################
 
-	/**/
+	/* iFrame */
 	#######################
 		function setting_str_webshop_iframe_url_callback()
 		{
@@ -1056,6 +1060,17 @@ class mf_str_webshop
 			$option = get_option($setting_key);
 
 			echo show_textfield(array('type' => 'url', 'name' => $setting_key, 'value' => $option));
+		}
+	#######################
+
+	/* API */
+	#######################
+		function setting_str_webshop_office_id_callback()
+		{
+			$setting_key = get_setting_key(__FUNCTION__);
+			$option = get_option($setting_key);
+
+			echo show_textfield(array('name' => $setting_key, 'value' => $option));
 		}
 	#######################
 
@@ -1130,6 +1145,10 @@ class mf_str_webshop
 			case 'iframe':
 				mf_enqueue_style('style_str_webshop_iframe', $plugin_include_url."style_iframe.css", $plugin_version);
 			break;
+
+			case 'api':
+				// None yet
+			break;
 		}
 	}
 
@@ -1155,6 +1174,30 @@ class mf_str_webshop
 				else
 				{
 					$out = "<em>".__("There is no content to display here yet", 'lang_str_webshop')."</em>";
+				}
+			break;
+
+			case 'api':
+				$setting_str_webshop_office_id = get_option('setting_str_webshop_office_id');
+
+				if($setting_str_webshop_office_id != '')
+				{
+					//$out = "<em>".__("There is an OfficeID connected to display here", 'lang_str_webshop')."</em>";
+
+					$plugin_version = get_plugin_version(__FILE__);
+
+					$out .= "<div id='api-course' data-version='v2'></div>
+					<script>
+						var officeId = ".$setting_str_webshop_office_id.",
+							apiHost = 'https://api.stroptima.se',
+							locale = 'sv';
+					</script>
+					<script	src='https://api.stroptima.se/js/api.js?v".$plugin_version."'></script>";
+				}
+
+				else
+				{
+					$out = "<em>".__("There is no OfficeID connected to display here yet", 'lang_str_webshop')."</em>";
 				}
 			break;
 		}
