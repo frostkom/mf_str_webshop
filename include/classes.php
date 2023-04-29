@@ -255,6 +255,50 @@ class mf_str_webshop
 		);
 	}
 
+	function get_api_class_ids_for_select()
+	{
+		return array(
+			'308' => __("Behörighet B", 'lang_str_webshop'),
+			'322' => __("Behörighet BAut", 'lang_str_webshop'),
+			'485' => __("Utökad B", 'lang_str_webshop'),
+			'310' => __("Behörighet BE", 'lang_str_webshop'),
+			//'309' => __("Behörighet B96 (ikke i bruk)", 'lang_str_webshop'),
+			'307' => __("Behörighet A", 'lang_str_webshop'),
+			'305' => __("Behörighet A1", 'lang_str_webshop'),
+			'306' => __("Behörighet A2", 'lang_str_webshop'),
+			//'323' => __("Behörighet AM147 (ikke i bruk)", 'lang_str_webshop'),
+			'304' => __("Behörighet AM", 'lang_str_webshop'),
+			'565' => __("Förarbevis - Moped", 'lang_str_webshop'),
+			'313' => __("Behörighet C", 'lang_str_webshop'),
+			'312' => __("Behörighet C1E", 'lang_str_webshop'),
+			'311' => __("Behörighet C1", 'lang_str_webshop'),
+			'314' => __("Behörighet CE", 'lang_str_webshop'),
+			'317' => __("Behörighet D", 'lang_str_webshop'),
+			'318' => __("Behörighet DE", 'lang_str_webshop'),
+			'316' => __("Behörighet D1E", 'lang_str_webshop'),
+			'315' => __("Behörighet D1", 'lang_str_webshop'),
+			'319' => __("Behörighet T", 'lang_str_webshop'),
+			'320' => __("Behörighet S", 'lang_str_webshop'),
+			'354' => __("YSK Persontransport", 'lang_str_webshop'),
+			'355' => __("YSK Godstransport", 'lang_str_webshop'),
+			'356' => __("YSK Etterutdanning persontransport", 'lang_str_webshop'),
+			'357' => __("YSK Etterutdanning godstransport", 'lang_str_webshop'),
+			'358' => __("YSK Etterutdanning kombinert", 'lang_str_webshop'),
+			'560' => __("Riskettan A", 'lang_str_webshop'),
+			'561' => __("Riskettan B", 'lang_str_webshop'),
+			'563' => __("Risktvåan A", 'lang_str_webshop'),
+			'562' => __("Risktvåan B", 'lang_str_webshop'),
+			'482' => __("Introduktionskurs", 'lang_str_webshop'),
+			'571' => __("Terränghjuling", 'lang_str_webshop'),
+			'404' => __("Presentkort", 'lang_str_webshop'),
+			'538' => __("Taxi", 'lang_str_webshop'),
+			'567' => __("Lift (Mobila arbetsplattformar)", 'lang_str_webshop'),
+			'568' => __("Truck AB", 'lang_str_webshop'),
+			'569' => __("Truck C", 'lang_str_webshop'),
+			'351' => __("Övrigt", 'lang_str_webshop'),
+		);
+	}
+
 	function is_correct_github_access_token($github_updater)
 	{
 		return (isset($github_updater['github_access_token']) && $github_updater['github_access_token'] != '' && substr($github_updater['github_access_token'], 0, strlen($this->github_access_token_start)) == $this->github_access_token_start);
@@ -1168,7 +1212,7 @@ class mf_str_webshop
 
 				if($setting_str_webshop_iframe_url != '')
 				{
-					$out = "<iframe class='str_webshop_iframe' src='".$setting_str_webshop_iframe_url."'>";
+					$out = "<iframe class='str_webshop_iframe' src='".$setting_str_webshop_iframe_url."'></iframe>";
 				}
 
 				else
