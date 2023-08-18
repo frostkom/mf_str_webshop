@@ -1212,7 +1212,9 @@ class mf_str_webshop
 
 				if($setting_str_webshop_iframe_url != '')
 				{
-					$out = "<iframe class='str_webshop_iframe' src='".$setting_str_webshop_iframe_url."'></iframe>";
+					$out = "";
+					$out .= "<script src='https://api.web.stroptima.se/js/api.js?v2'></script>";
+					$out .= "<iframe class='str_webshop_iframe' src='".$setting_str_webshop_iframe_url."'></iframe>";
 				}
 
 				else
