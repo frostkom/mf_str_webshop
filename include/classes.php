@@ -2,15 +2,22 @@
 
 class mf_str_webshop
 {
+	var $meta_prefix = 'str_webshop_';
+	var $post_type = "";
+	var $github_settings_url = "";
+	var $github_access_token_start = "ghp_i4v";
+	var $page_header = "";
+	var $page_footer = "";
+
 	function __construct()
 	{
-		$this->meta_prefix = 'str_webshop_';
+		//$this->meta_prefix = 'str_webshop_';
 		$this->post_type = $this->meta_prefix.'page';
 
 		//$this->github_settings_url = (is_multisite() ? network_admin_url("settings.php?page=github-updater&tab=github_updater_settings&subtab=github") : admin_url("options-general.php?page=github-updater&tab=github_updater_settings&subtab=github"));
 		$this->github_settings_url = (is_multisite() ? network_admin_url("settings.php?page=git-updater&tab=git_updater_settings&subtab=github") : admin_url("options-general.php?page=git-updater&tab=git_updater_settings&subtab=github"));
 
-		$this->github_access_token_start = "ghp_i4v";
+		//$this->github_access_token_start = "ghp_i4v";
 	}
 
 	function get_base_path($data = array())
@@ -1232,13 +1239,69 @@ class mf_str_webshop
 
 					$plugin_version = get_plugin_version(__FILE__);
 
-					$out .= "<div id='api-course' data-version='v2'></div>
+					$out .= "<div id='api-course' data-version='v2'"
+						//." data-class-id='482'"
+						//." data-accordion='true'"
+						//." data-expanded-id='482'"
+						//." data-limit='3'"
+					."></div>
 					<script>
 						var officeId = ".$setting_str_webshop_office_id.",
 							apiHost = 'https://api.stroptima.se',
 							locale = 'sv';
 					</script>
 					<script	src='https://api.stroptima.se/js/api.js?v".$plugin_version."'></script>";
+
+					/*$heading_bg = "#2A787A";
+					$heading_color = "#fff";
+					$panel_color = "#226062";
+					
+					$css = ".TABS .panel-default > .panel-heading
+					{
+						background-color: ".$heading_bg." !important;
+						border-color: ".$heading_bg.";
+						color: ".$heading_color." !important;
+					}
+					
+					.TABS .modal-title
+					{
+						background-color: ".$heading_bg." !important;
+						color: ".$heading_color." !important;
+					}
+					
+					.TABS .modal-header
+					{
+						background-color: ".$heading_bg." !important;
+					}
+					
+					.btn
+					{
+						background-color: ".$heading_bg." !important;
+						border-color: ".$heading_bg.";
+						color: ".$heading_color." !important;
+					}
+					
+					.panel-group p
+					{
+						color: ".$panel_color." !important;
+						border-radius: 5px;
+					}
+					
+					.str_webshop_iframe
+					{
+						height: 4000px;
+					}
+
+					.TABS div.col-sm-4.col-xs-12
+					{
+						width: 60%;
+					}
+					
+					.TABS .col-sm-4.col-xs-6
+					{
+						text-align: right;
+						color: ".$panel_color.";
+					}";*/
 				}
 
 				else
