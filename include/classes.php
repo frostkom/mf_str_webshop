@@ -1235,7 +1235,8 @@ class mf_str_webshop
 
 				if($setting_str_webshop_office_id != '')
 				{
-					//$out = "<em>".__("There is an OfficeID connected to display here", 'lang_str_webshop')."</em>";
+					$out = "";
+					//$out .= "<em>".__("There is an OfficeID connected to display here", 'lang_str_webshop')."</em>";
 
 					$plugin_version = get_plugin_version(__FILE__);
 
@@ -1255,38 +1256,38 @@ class mf_str_webshop
 					/*$heading_bg = "#2A787A";
 					$heading_color = "#fff";
 					$panel_color = "#226062";
-					
+
 					$css = ".TABS .panel-default > .panel-heading
 					{
 						background-color: ".$heading_bg." !important;
 						border-color: ".$heading_bg.";
 						color: ".$heading_color." !important;
 					}
-					
+
 					.TABS .modal-title
 					{
 						background-color: ".$heading_bg." !important;
 						color: ".$heading_color." !important;
 					}
-					
+
 					.TABS .modal-header
 					{
 						background-color: ".$heading_bg." !important;
 					}
-					
+
 					.btn
 					{
 						background-color: ".$heading_bg." !important;
 						border-color: ".$heading_bg.";
 						color: ".$heading_color." !important;
 					}
-					
+
 					.panel-group p
 					{
 						color: ".$panel_color." !important;
 						border-radius: 5px;
 					}
-					
+
 					.str_webshop_iframe
 					{
 						height: 4000px;
@@ -1296,7 +1297,7 @@ class mf_str_webshop
 					{
 						width: 60%;
 					}
-					
+
 					.TABS .col-sm-4.col-xs-6
 					{
 						text-align: right;
