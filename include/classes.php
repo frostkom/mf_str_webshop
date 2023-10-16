@@ -392,7 +392,7 @@ class mf_str_webshop
 							{
 								case 'html':
 									$out .= "<ul>
-										<li>&nbsp;&nbsp;<i class='fa ".($setting_base_update_htaccess == 'yes' ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".__("Automatically Update %s", 'lang_str_webshop')."</a></li>
+										<li>&nbsp;&nbsp;<i class='fa ".($setting_base_update_htaccess == 'yes' ? "fa fa-check green" : "fa fa-times red")."'></i> <a href='".$settings_url."'>".sprintf(__("Automatically Update %s", 'lang_str_webshop'), ".htaccess")."</a></li>
 									</ul>";
 								break;
 
