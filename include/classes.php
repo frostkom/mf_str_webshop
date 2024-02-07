@@ -11,13 +11,10 @@ class mf_str_webshop
 
 	function __construct()
 	{
-		//$this->meta_prefix = 'str_webshop_';
 		$this->post_type = $this->meta_prefix.'page';
 
 		//$this->github_settings_url = (is_multisite() ? network_admin_url("settings.php?page=github-updater&tab=github_updater_settings&subtab=github") : admin_url("options-general.php?page=github-updater&tab=github_updater_settings&subtab=github"));
 		$this->github_settings_url = (is_multisite() ? network_admin_url("settings.php?page=git-updater&tab=git_updater_settings&subtab=github") : admin_url("options-general.php?page=git-updater&tab=git_updater_settings&subtab=github"));
-
-		//$this->github_access_token_start = "ghp_i4v";
 	}
 
 	function get_base_path($data = array())
