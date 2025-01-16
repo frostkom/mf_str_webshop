@@ -221,8 +221,7 @@ class mf_str_webshop
 			<script src='".$script_url."'></script>";
 
 			// This will make explode() in view/index.php split at the wrong position
-			//$plugin_version = get_plugin_version(__FILE__);
-			//mf_enqueue_script('script_str_webshop_ecom', $script_url, $plugin_version);
+			//mf_enqueue_script('script_str_webshop_ecom', $script_url);
 		}
 
 		else
@@ -1145,7 +1144,6 @@ class mf_str_webshop
 		global $post;
 
 		$plugin_include_url = plugin_dir_url(__FILE__);
-		$plugin_version = get_plugin_version(__FILE__);
 
 		switch(get_option('setting_str_webshop_version', 'old'))
 		{
@@ -1170,28 +1168,28 @@ class mf_str_webshop
 						$obj_base = new mf_base();
 					}
 
-					$obj_base->load_font_awesome(array('type' => 'external', 'plugin_include_url' => plugins_url()."/mf_base/include/", 'plugin_version' => $plugin_version));*/
+					$obj_base->load_font_awesome(array('type' => 'external', 'plugin_include_url' => plugins_url()."/mf_base/include/"));*/
 
 					/*if(get_option('setting_str_webshop_replace_campaigns', 'yes') == 'yes')
 					{
-						mf_enqueue_style('style_str_webshop_category_text', $plugin_include_url."style_category_text.php", $plugin_version);
-						mf_enqueue_script('script_str_webshop_category_text', $plugin_include_url."script_category_text.js", $plugin_version);
+						mf_enqueue_style('style_str_webshop_category_text', $plugin_include_url."style_category_text.php");
+						mf_enqueue_script('script_str_webshop_category_text', $plugin_include_url."script_category_text.js");
 					}*/
 
 					if(get_option('setting_str_webshop_include_extra_css') != 'no')
 					{
-						mf_enqueue_style('style_str_webshop_extra', $plugin_include_url."style_extra.css", $plugin_version);
+						mf_enqueue_style('style_str_webshop_extra', $plugin_include_url."style_extra.css");
 					}
 
 					/*if($has_custom_style)
 					{
-						mf_enqueue_style('style_str_webshop_custom', $plugin_include_url."style.php", $plugin_version);
+						mf_enqueue_style('style_str_webshop_custom', $plugin_include_url."style.php");
 					}*/
 				}
 			break;
 
 			case 'iframe':
-				mf_enqueue_style('style_str_webshop_iframe', $plugin_include_url."style_iframe.css", $plugin_version);
+				mf_enqueue_style('style_str_webshop_iframe', $plugin_include_url."style_iframe.css");
 			break;
 
 			case 'api':
