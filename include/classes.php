@@ -1125,7 +1125,7 @@ class mf_str_webshop
 	{
 		$menu_root = 'mf_str_webshop/';
 		$menu_start = $menu_root."manual/index.php";
-		$menu_capability = override_capability(array('page' => $menu_start, 'default' => 'edit_posts'));
+		$menu_capability = 'edit_posts';
 
 		$count_message = $this->get_status(array('type' => 'menu'));
 
