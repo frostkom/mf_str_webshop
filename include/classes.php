@@ -843,14 +843,12 @@ class mf_str_webshop
 		{
 			if(get_option('setting_str_webshop_version', 'old') == 'old')
 			{
-				$labels = array(
-					'name' => _x(__("Sitemap Pages", 'lang_str_webshop'), 'post type general name'),
-					'singular_name' => _x(__("Sitemap Page", 'lang_str_webshop'), 'post type singular name'),
-					'menu_name' => __("Sitemap Pages", 'lang_str_webshop')
-				);
-
 				$args = array(
-					'labels' => $labels,
+					'labels' => array(
+						'name' => __("Sitemap Pages", 'lang_str_webshop'),
+						'singular_name' => __("Sitemap Page", 'lang_str_webshop'),
+						'menu_name' => __("Sitemap Pages", 'lang_str_webshop')
+					),
 					'public' => does_post_exists(array('post_type' => $this->post_type)),
 					//'show_ui' => false,
 					//'show_in_menu' => false,
