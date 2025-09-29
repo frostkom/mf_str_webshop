@@ -555,7 +555,7 @@ class mf_str_webshop
 
 			if(!($setting_str_webshop_post_id > 0) || $setting_str_webshop_api_mode == '' || $setting_str_webshop_customer_number == '' || $setting_str_webshop_google_analytics == '' || $setting_str_webshop_include_css == '' || $setting_str_webshop_header_selector == '')
 			{
-				$result = $wpdb->get_results($wpdb->prepare("SELECT post_id, meta_value FROM ".$wpdb->posts." INNER JOIN ".$wpdb->postmeta." ON ".$wpdb->posts.".ID = ".$wpdb->postmeta.".post_id WHERE post_status = %s AND meta_key = %s AND meta_value LIKE %s ORDER BY post_modified DESC LIMIT 0, 1", 'publish', '_fl_builder_data', '%data-customer-number%'));
+				$result = $wpdb->get_results($wpdb->prepare("SELECT post_id, meta_value FROM ".$wpdb->posts." INNER JOIN ".$wpdb->postmeta." ON ".$wpdb->posts.".ID = ".$wpdb->postmeta.".post_id AND meta_key = %s WHERE post_status = %s AND meta_value LIKE %s ORDER BY post_modified DESC LIMIT 0, 1", '_fl_builder_data', 'publish', '%data-customer-number%'));
 
 				foreach($result as $r)
 				{
@@ -847,7 +847,11 @@ class mf_str_webshop
 					'labels' => array(
 						'name' => __("Sitemap Pages", 'lang_str_webshop'),
 						'singular_name' => __("Sitemap Page", 'lang_str_webshop'),
-						'menu_name' => __("Sitemap Pages", 'lang_str_webshop')
+						'menu_name' => __("Sitemap Pages", 'lang_str_webshop'),
+						'all_items' => __('List', 'lang_str_webshop'),
+						'edit_item' => __('Edit', 'lang_str_webshop'),
+						'view_item' => __('View', 'lang_str_webshop'),
+						'add_new_item' => __('Add New', 'lang_str_webshop'),
 					),
 					'public' => does_post_exists(array('post_type' => $this->post_type)),
 					//'show_ui' => false,

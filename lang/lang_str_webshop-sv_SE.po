@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-20 13:24+0100\n"
+"POT-Creation-Date: 2025-09-15 08:32+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Fors\n"
 "Language-Team: \n"
@@ -15,28 +15,184 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../include/classes.php:226
+#: ../include/classes.php:230
 msgid "We do not have a webshop yet..."
 msgstr "Vi har ingen e-handel ännu..."
 
-#: ../include/classes.php:230
+#: ../include/classes.php:234
 msgid "Go to Settings and enter your Customer Number"
 msgstr "Gå till Inställningarna och ange ett kundnummer"
 
-#: ../include/classes.php:242
-#: ../include/classes.php:244
+#: ../include/classes.php:246
+msgid "Old"
+msgstr "Gammal"
+
+#: ../include/classes.php:247
+msgid "iFrame"
+msgstr ""
+
+#: ../include/classes.php:248
+msgid "API"
+msgstr ""
+
+#: ../include/classes.php:255
+#: ../include/classes.php:257
 msgid "Test"
 msgstr ""
 
-#: ../include/classes.php:243
+#: ../include/classes.php:256
 msgid "Live"
 msgstr ""
 
-#: ../include/classes.php:244
+#: ../include/classes.php:257
 msgid "If logged in"
 msgstr "Som inloggad"
 
-#: ../include/classes.php:302
+#: ../include/classes.php:264
+msgid "Behrighet B"
+msgstr ""
+
+#: ../include/classes.php:265
+msgid "Behrighet BAut"
+msgstr ""
+
+#: ../include/classes.php:266
+msgid "Utkad B"
+msgstr ""
+
+#: ../include/classes.php:267
+msgid "Behrighet BE"
+msgstr ""
+
+#: ../include/classes.php:269
+msgid "Behrighet A"
+msgstr ""
+
+#: ../include/classes.php:270
+msgid "Behrighet A1"
+msgstr ""
+
+#: ../include/classes.php:271
+msgid "Behrighet A2"
+msgstr ""
+
+#: ../include/classes.php:273
+msgid "Behrighet AM"
+msgstr ""
+
+#: ../include/classes.php:274
+msgid "Frarbevis - Moped"
+msgstr ""
+
+#: ../include/classes.php:275
+msgid "Behrighet C"
+msgstr ""
+
+#: ../include/classes.php:276
+msgid "Behrighet C1E"
+msgstr ""
+
+#: ../include/classes.php:277
+msgid "Behrighet C1"
+msgstr ""
+
+#: ../include/classes.php:278
+msgid "Behrighet CE"
+msgstr ""
+
+#: ../include/classes.php:279
+msgid "Behrighet D"
+msgstr ""
+
+#: ../include/classes.php:280
+msgid "Behrighet DE"
+msgstr ""
+
+#: ../include/classes.php:281
+msgid "Behrighet D1E"
+msgstr ""
+
+#: ../include/classes.php:282
+msgid "Behrighet D1"
+msgstr ""
+
+#: ../include/classes.php:283
+msgid "Behrighet T"
+msgstr ""
+
+#: ../include/classes.php:284
+msgid "Behrighet S"
+msgstr ""
+
+#: ../include/classes.php:285
+msgid "YSK Persontransport"
+msgstr ""
+
+#: ../include/classes.php:286
+msgid "YSK Godstransport"
+msgstr ""
+
+#: ../include/classes.php:287
+msgid "YSK Etterutdanning persontransport"
+msgstr ""
+
+#: ../include/classes.php:288
+msgid "YSK Etterutdanning godstransport"
+msgstr ""
+
+#: ../include/classes.php:289
+msgid "YSK Etterutdanning kombinert"
+msgstr ""
+
+#: ../include/classes.php:290
+msgid "Riskettan A"
+msgstr ""
+
+#: ../include/classes.php:291
+msgid "Riskettan B"
+msgstr ""
+
+#: ../include/classes.php:292
+msgid "Risktvan A"
+msgstr ""
+
+#: ../include/classes.php:293
+msgid "Risktvan B"
+msgstr ""
+
+#: ../include/classes.php:294
+msgid "Introduktionskurs"
+msgstr ""
+
+#: ../include/classes.php:295
+msgid "Terrnghjuling"
+msgstr ""
+
+#: ../include/classes.php:296
+msgid "Presentkort"
+msgstr ""
+
+#: ../include/classes.php:297
+msgid "Taxi"
+msgstr ""
+
+#: ../include/classes.php:298
+msgid "Lift (Mobila arbetsplattformar)"
+msgstr ""
+
+#: ../include/classes.php:299
+msgid "Truck AB"
+msgstr ""
+
+#: ../include/classes.php:300
+msgid "Truck C"
+msgstr ""
+
+#: ../include/classes.php:301
+msgid "vrigt"
+msgstr ""
+
+#: ../include/classes.php:359
 #: ../manual/index.php:58
 #: ../manual/index.php:63
 #: ../manual/index.php:67
@@ -44,132 +200,169 @@ msgstr "Som inloggad"
 msgid "%s Access Token"
 msgstr "Behörighetsnyckel för %s"
 
-#: ../include/classes.php:334
+#: ../include/classes.php:391
 #, php-format
 msgid "Automatically Update %s"
 msgstr "Uppdatera %s automatiskt"
 
-#: ../include/classes.php:355
-#: ../include/classes.php:834
+#: ../include/classes.php:412
+#: ../include/classes.php:905
 msgid "Page"
 msgstr "Sida"
 
-#: ../include/classes.php:361
+#: ../include/classes.php:418
 #, php-format
 msgid "The header is %d long and the footer is %d long"
 msgstr "Sidhuvudet är %d lång och sidfoten är %d lång"
 
-#: ../include/classes.php:361
+#: ../include/classes.php:418
 msgid "Public and Contains the Correct Data"
 msgstr "Publik och innehåller rätt data"
 
-#: ../include/classes.php:364
-#: ../include/classes.php:836
+#: ../include/classes.php:421
+#: ../include/classes.php:907
 msgid "Customer Number"
 msgstr "Kundnummer"
 
-#: ../include/classes.php:409
+#: ../include/classes.php:466
 msgid "Warnings"
 msgstr "Varningar"
 
-#: ../include/classes.php:475
+#: ../include/classes.php:532
 msgid "unknown"
 msgstr "okänd"
 
-#: ../include/classes.php:665
+#: ../include/classes.php:722
 msgid "Product Details"
 msgstr "Produktdetaljer"
 
-#: ../include/classes.php:757
+#: ../include/classes.php:814
 #, php-format
 msgid "A new version of %s is available on %s"
 msgstr "En ny version av %s är tillgänglig på %s"
 
-#: ../include/classes.php:758
+#: ../include/classes.php:815
 #, php-format
 msgid "The version %s is now available for update on %s and the version history can be read on %sGitHub%s"
 msgstr "Versionen %s är nu tillgänglig för uppdatering på %s och versionshistoriken kan läsas på %sGitHub%s"
 
-#: ../include/classes.php:788
-#: ../include/classes.php:790
+#: ../include/classes.php:848
+#: ../include/classes.php:850
 msgid "Sitemap Pages"
 msgstr "Sitemap-sidor"
 
-#: ../include/classes.php:789
+#: ../include/classes.php:849
 msgid "Sitemap Page"
 msgstr "Sitemap-sida"
 
-#: ../include/classes.php:835
+#: ../include/classes.php:851
+msgid "List"
+msgstr "Lista"
+
+#: ../include/classes.php:852
+msgid "Edit"
+msgstr "Redigera"
+
+#: ../include/classes.php:853
+msgid "View"
+msgstr "Visa"
+
+#: ../include/classes.php:854
+msgid "Add New"
+msgstr "Lägg till ny"
+
+#: ../include/classes.php:897
+#: ../manual/index.php:85
+msgid "Version"
+msgstr ""
+
+#: ../include/classes.php:906
 msgid "API Mode"
 msgstr "API-läge"
 
-#: ../include/classes.php:850
+#: ../include/classes.php:912
+msgid "URL"
+msgstr ""
+
+#: ../include/classes.php:916
+msgid "Office ID"
+msgstr ""
+
+#: ../include/classes.php:932
 msgid "Include CSS"
 msgstr "Inkludera CSS"
 
-#: ../include/classes.php:851
+#: ../include/classes.php:933
 msgid "Include Extra CSS"
 msgstr "Inkludera extra CSS"
 
-#: ../include/classes.php:852
+#: ../include/classes.php:934
 msgid "Header Selector"
 msgstr "ID/Klass för sidhuvud"
 
-#: ../include/classes.php:866
+#: ../include/classes.php:948
 msgid "Disable Canonical"
 msgstr "Stäng av 'Canonical'"
 
-#: ../include/classes.php:867
+#: ../include/classes.php:949
 msgid "Activate Sitemap API"
 msgstr "Aktivera Sitemap-API"
 
-#: ../include/classes.php:868
+#: ../include/classes.php:950
 msgid "New Version Notification"
 msgstr "Meddelande om ny version"
 
-#: ../include/classes.php:879
-#: ../include/classes.php:931
-#: ../include/classes.php:976
-#: ../include/classes.php:1018
+#: ../include/classes.php:962
+#: ../include/classes.php:1024
+#: ../include/classes.php:1069
+#: ../include/classes.php:1134
 msgid "Webshop"
 msgstr "E-handel"
 
-#: ../include/classes.php:895
+#: ../include/classes.php:988
 msgid "Preview on Test Page"
 msgstr "Förhandsgranska på testsida"
 
-#: ../include/classes.php:922
+#: ../include/classes.php:1015
 msgid "Get yours here"
 msgstr "Hämta din här"
 
-#: ../include/classes.php:931
+#: ../include/classes.php:1024
 msgid "Style"
 msgstr "Layout"
 
-#: ../include/classes.php:939
+#: ../include/classes.php:1032
 msgid "This adds basic styling when the Javascript is loaded"
 msgstr "Detta lägger till grundlayouten när Javascript-koden laddas"
 
-#: ../include/classes.php:947
+#: ../include/classes.php:1040
 msgid "This adds compatibility styling for the cart when it is open"
 msgstr "Detta lägger till kompatibilitet för varukorgen när den är öppen"
 
-#: ../include/classes.php:976
+#: ../include/classes.php:1069
 msgid "Advanced"
 msgstr "Avancerat"
 
-#: ../include/classes.php:1004
+#: ../include/classes.php:1097
 msgid "Please choose who to notify when a new version is available"
 msgstr "Välj vem som ska få meddelande när en ny version finns tillgänglig"
 
-#: ../include/classes.php:1021
+#: ../include/classes.php:1137
 #: ../manual/index.php:16
 msgid "Manual"
 msgstr ""
 
-#: ../include/classes.php:1024
+#: ../include/classes.php:1140
 msgid "Settings"
 msgstr "Inställningar"
+
+#: ../include/classes.php:1226
+msgid "There is no content to display here yet"
+msgstr ""
+
+#: ../include/classes.php:1307
+msgid "There is no OfficeID connected to display here yet"
+msgstr ""
 
 #: ../include/style_category_text.php:21
 msgid "Loading"
@@ -282,10 +475,6 @@ msgstr "Ladda om"
 msgid "Status"
 msgstr ""
 
-#: ../manual/index.php:85
-msgid "Version"
-msgstr ""
-
 #: ../manual/index.php:91
 #, php-format
 msgid "The installed version is %s and the latest version on GitHub is %s."
@@ -360,9 +549,6 @@ msgstr "Jag kunde inte hitta ett kundnummer. Var vänlig lägg till ett och för
 #~ msgid "Remove %s from %s"
 #~ msgstr "Ta bort %s från %s"
 
-#~ msgid "New"
-#~ msgstr "Ny"
-
 #~ msgid "There are %d new errors in the log"
 #~ msgstr "Det finns %d nya fel i loggen"
 
@@ -392,9 +578,6 @@ msgstr "Jag kunde inte hitta ett kundnummer. Var vänlig lägg till ett och för
 
 #~ msgid "Trash"
 #~ msgstr "Papperskorg"
-
-#~ msgid "Name"
-#~ msgstr "Namn"
 
 #~ msgid "Amount"
 #~ msgstr "Antal"
