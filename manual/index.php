@@ -89,7 +89,7 @@ echo "<div class='wrap'>
 							$github_version = $obj_str_webshop->get_github_version();
 
 							echo "<p>".sprintf(__("The installed version is %s and the latest version on GitHub is %s.", 'lang_str_webshop'), $plugin_version, $github_version)."</p>
-							<p>".sprintf(__("Take a look at the version history %shere%s.", 'lang_str_webshop'), "<a href='//github.com/frostkom/mf_str_webshop/commits/master' rel='external'>", "</a>")."</p>";
+							<p>".sprintf(__("Take a look at the version history %shere%s.", 'lang_str_webshop'), "<a href='//github.com/frostkom/mf_str_webshop/commits/master'>", "</a>")."</p>";
 
 						echo "</div>
 					</div>
