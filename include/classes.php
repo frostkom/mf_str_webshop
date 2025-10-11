@@ -620,7 +620,7 @@ class mf_str_webshop
 			{
 				global $obj_base;
 
-				$post_content = mf_get_post_content($setting_str_webshop_post_id);
+				$post_content = get_post_field('post_content', $setting_str_webshop_post_id);
 
 				if($post_content == '' || (strpos($post_content, "str-ecom") === false && strpos($post_content, "[mf_str_webshop]") === false && strpos($post_content, "wp:fl-builder/layout") === false))
 				{
@@ -868,7 +868,7 @@ class mf_str_webshop
 				if($setting_str_webshop_post_id > 0)
 				{
 					$args['rewrite'] = array(
-						'slug' => mf_get_post_content($setting_str_webshop_post_id, 'post_name'),
+						'slug' => get_post_field('post_name', $setting_str_webshop_post_id),
 					);
 				}
 
