@@ -9,30 +9,27 @@ if(!defined('ABSPATH'))
 	require_once($folder."wp-load.php");
 }
 
-echo "@media all
+echo "#str-ecom .campaigns
 {
-	#str-ecom .campaigns
+	padding: 2rem;
+}
+
+	#str-ecom .campaigns:after
 	{
-		padding: 2rem;
+		content: '".__("Loading", 'lang_str_webshop')."...';
 	}
 
-		#str-ecom .campaigns:after
+		#str-ecom .campaigns.loaded:after
 		{
-			content: '".__("Loading", 'lang_str_webshop')."...';
+			content: '';
 		}
 
-			#str-ecom .campaigns.loaded:after
-			{
-				content: '';
-			}
+		#str-ecom .campaigns > .carousel
+		{
+			display: none;
+		}
 
-			#str-ecom .campaigns > .carousel
-			{
-				display: none;
-			}
-
-			#str-ecom .campaigns .webshop_category_text p:last-of-type
-			{
-				margin-bottom: 0;
-			}
-}";
+		#str-ecom .campaigns .webshop_category_text p:last-of-type
+		{
+			margin-bottom: 0;
+		}";

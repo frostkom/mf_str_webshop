@@ -1,51 +1,43 @@
-@media all
+/* This prevents scroll when cart is open */
+html.responsive
 {
-	/* This prevents scroll when cart is open */
-	html.responsive
-	{
-		overflow-x: unset !important;
-	}
+	overflow-x: unset !important;
+}
 
-	/* This prevents scroll-top-link to appear on top of cart */
-	body.menu-is-open #scroll-top-link
-	{
-		z-index: 0;
-	}
+/* This prevents scroll-top-link to appear on top of cart */
+body.menu-is-open #scroll-top-link
+{
+	z-index: 0;
+}
 
-	/* This adds top margin to temporary message when changing content in cart */
-	body #str-ecom .Toastify__toast-container--top-center
-	{
-		margin-top: 100px;
-	}
+/* This adds top margin to temporary message when changing content in cart */
+body #str-ecom .Toastify__toast-container--top-center
+{
+	margin-top: 100px;
+}
 
-	/* This adds margin when admin bar is visible, otherwise close icon and "toast" notice won't be displayed properly in relation to admin bar */
-	body.logged-in.admin-bar #str-ecom #menu-navigation.open
-	{
-		margin-top: 32px;
-	}
+/* This adds margin when admin bar is visible, otherwise close icon and "toast" notice won't be displayed properly in relation to admin bar */
+body.logged-in.admin-bar #str-ecom #menu-navigation.open
+{
+	margin-top: 32px;
+}
 
-	body.logged-in.admin-bar #str-ecom .Toastify__toast-container--top-center
-	{
-		margin-top: 132px;
-	}
+body.logged-in.admin-bar #str-ecom .Toastify__toast-container--top-center
+{
+	margin-top: 132px;
+}
 
-	#str-ecom .alert.alert-info .small.ml-4
-	{
-		white-space: nowrap;
-	}
+#str-ecom .alert.alert-info .small.ml-4
+{
+	white-space: nowrap;
+}
 
-	#str-ecom #cart .cart-items
-	{
-		height: calc(100% - 7rem) !important;
-	}
+#str-ecom #cart .cart-items
+{
+	height: calc(100% - 7rem) !important;
+}
 
-	#str-ecom #cart.cart-info .cart-items
-	{
-		height: calc(100% - 12rem) !important;
-	}
-
-	/*#str-ecom .campaigns
-	{
-		display: none;
-	}*/
+#str-ecom #cart.cart-info .cart-items
+{
+	height: calc(100% - 12rem) !important;
 }
