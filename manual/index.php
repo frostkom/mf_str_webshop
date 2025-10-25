@@ -15,7 +15,7 @@ $obj_str_webshop->settings_github_url = str_replace($site_url, $strSiteUrl, $obj
 echo "<div class='wrap'>
 	<h2>".__("Manual", 'lang_str_webshop')."</h2>
 	<div id='poststuff'>
-		<form action='#' method='post' class='mf_form mf_settings'>
+		<form action='#' method='post' class='mf_form'>
 			<div id='post-body' class='columns-2'>
 				<div id='post-body-content'>
 					<div class='postbox'>
