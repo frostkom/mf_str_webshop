@@ -3,7 +3,7 @@
 class mf_str_webshop
 {
 	var $meta_prefix = 'str_webshop_';
-	var $post_type = "";
+	var $post_type = '';
 	var $github_settings_url = "";
 	var $github_access_token_start = "ghp_i4v";
 	var $page_header = "";
