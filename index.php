@@ -2,8 +2,8 @@
 /*
 Plugin Name: MF STR Webshop
 Plugin URI: https://github.com/frostkom/mf_str_webshop
-Description: Wordpress plugin that adds support for an STR webshop
-Version: 1.7.26
+Description: Adds support for an STR webshop
+Version: 1.7.27
 Licence: GPLv2 or later
 Author: Martin Fors
 Author URI: https://martinfors.se
