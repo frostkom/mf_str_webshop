@@ -682,7 +682,7 @@ class mf_str_webshop
 						switch($headers['http_code'])
 						{
 							case 200:
-								$json = json_decode($content, true);
+								$arr_json = json_decode($content, true);
 
 								/*[
 									{
@@ -703,12 +703,12 @@ class mf_str_webshop
 									}
 								]*/
 
-								//do_log("API Result: ".var_export($json, true));
+								//do_log("API Result: ".var_export($arr_json, true));
 
-								foreach($json as $item)
+								foreach($arr_json as $arr_item)
 								{
-									$post_title = $item['name'];
-									$post_slug = trim($item['url'], "/");
+									$post_title = $arr_item['name'];
+									$post_slug = trim($arr_item['url'], "/");
 
 									$arr_post_slug = explode("/", $post_slug);
 									$depth_count = count($arr_post_slug);
@@ -1097,7 +1097,7 @@ class mf_str_webshop
 				$description = __("Please choose who to notify when a new version is available", 'lang_str_webshop'); //"<i class='fa fa-exclamation-triangle yellow display_warning'></i> ".
 			}
 
-			echo show_textfield(array('name' => $setting_key, 'value' => $option, 'placeholder' => get_placeholder_email(), 'description' => $description));
+			echo show_textfield(array('name' => $setting_key, 'value' => $option, 'description' => $description)); //, 'placeholder' => get_placeholder_email()
 		}
 	#######################
 
