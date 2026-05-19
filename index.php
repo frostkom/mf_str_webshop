@@ -3,7 +3,7 @@
 Plugin Name: MF STR Webshop
 Plugin URI: https://github.com/frostkom/mf_str_webshop
 Description: Adds support for an STR webshop
-Version: 1.7.28
+Version: 1.7.29
 Licence: GPLv2 or later
 Author: Martin Fors
 Author URI: https://martinfors.se

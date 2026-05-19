@@ -229,7 +229,7 @@ class mf_str_webshop
 			$out = "<p id='str-ecom'>"
 				.__("We do not have a webshop yet...", 'lang_str_webshop');
 
-				if(IS_EDITOR)
+				if(IS_ADMINISTRATOR)
 				{
 					$out .= "&nbsp;<a href='".admin_url("options-general.php?page=settings_mf_base#settings_str_webshop")."'>".__("Go to Settings and enter your Customer Number", 'lang_str_webshop')."</a>";
 				}
@@ -1137,8 +1137,11 @@ class mf_str_webshop
 		$menu_title = __("Manual", 'lang_str_webshop');
 		add_submenu_page($menu_start, $menu_title, $menu_title.$count_message, $menu_capability, $menu_start);
 
-		$menu_title = __("Settings", 'lang_str_webshop');
-		add_submenu_page($menu_start, $menu_title, $menu_title, $menu_capability, admin_url("options-general.php?page=settings_mf_base#settings_str_webshop"));
+		if(IS_ADMINISTRATOR)
+		{
+			$menu_title = __("Settings", 'lang_str_webshop');
+			add_submenu_page($menu_start, $menu_title, $menu_title, $menu_capability, admin_url("options-general.php?page=settings_mf_base#settings_str_webshop"));
+		}
 	}
 
 	function wp_head()
