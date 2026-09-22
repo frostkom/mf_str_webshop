@@ -1166,14 +1166,7 @@ class mf_str_webshop
 					}
 
 					// Test this before use
-					/*global $obj_base;
-
-					if(!isset($obj_base))
-					{
-						$obj_base = new mf_base();
-					}
-
-					$obj_base->load_font_awesome(array('type' => 'external', 'plugin_include_url' => plugins_url()."/mf_base/include/"));*/
+					//do_action('load_font_awesome');
 
 					/*if(get_option('setting_str_webshop_replace_campaigns', 'yes') == 'yes')
 					{
